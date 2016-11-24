@@ -70,6 +70,25 @@ public class CadastroAuxiliar {
         return cliente;
     }
 
+    public boolean CampoVazio(){
+        if ((editCpfCli.getText().toString().equals(""))
+                ||(editNomeCli.getText().toString().equals(""))
+                ||(editRuaCli.getText().toString().equals(""))
+                ||(editNumCli.getText().toString().equals(""))
+                ||(editCompleCli.getText().toString().equals(""))
+                ||(editBairroCli.getText().toString().equals(""))
+                ||(editCidadeCli.getText().toString().equals(""))
+                ||(spinEstadoCli.getSelectedItem().toString().equals("Estado"))
+                ||(editCepCli.getText().toString().equals(""))
+                ||(editTelCli.getText().toString().equals(""))
+                ||(editEmailCli.getText().toString().equals(""))){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public int retornaEstadoPosicao(String nomeEstado){
         int valor = 0;
         switch (nomeEstado){

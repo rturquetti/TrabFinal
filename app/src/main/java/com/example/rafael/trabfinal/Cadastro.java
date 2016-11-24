@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Cadastro extends AppCompatActivity {
     private CadastroAuxiliar auxiliar;
@@ -40,18 +41,30 @@ public class Cadastro extends AppCompatActivity {
                 ClienteDAO dao = new ClienteDAO(Cadastro.this);
 
                 if (clienteParaAlterar == null) {
-                    dao.salva(cliente);
+                    if (auxiliar.CampoVazio()){
+                        Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        dao.salva(cliente);
+                        dao.close();
+                        finish();
+                    }
                 }else {
-                    cliente.setId(clienteParaAlterar.getId());
-                    dao.editar(cliente);
+                    if (auxiliar.CampoVazio()){
+                        Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        cliente.setId(clienteParaAlterar.getId());
+                        dao.editar(cliente);
+                        finish();
+                    }
                 }
 
-                dao.close();
-                finish();
+
             }
         });
 
-        botaoCancelar.setOnClickListener(new View.OnClickListener() {
+        botaoCancelar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 finish();

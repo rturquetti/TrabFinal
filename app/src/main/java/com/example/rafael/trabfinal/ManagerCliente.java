@@ -24,7 +24,7 @@ public class ManagerCliente extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio);
+        setContentView(R.layout.activity_lista_cliente);
 
         listOrcamento = (ListView) findViewById(R.id.listOrcamento);
 
