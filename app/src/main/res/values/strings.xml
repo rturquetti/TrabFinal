@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Orçamento</string>
-    <string name="actCadastrar">Cadastrar</string>
-
+    <string name="actCadastrarCliente">Cadastrar Cliente</string>
+    <string name="actCadastrarPeca">Cadastrar Peça</string>
 
     <string name="novoPed">Novo Pedido</string>
     <string name="novoCli">Novo Cliente</string>
+    <string name="novaPeca">Nova Peça</string>
     <string name="action_settings">Settings</string>
 
     <string-array name="spinEstadosCli">
@@ -51,5 +52,13 @@
     <string name="editEmailCli">E-mail</string>
     <string name="buttonSalvar">Salvar</string>
     <string name="buttonCancelar">Cancelar</string>
+
+    <string name="editNomePca">Nome</string>
+    <string name="editMarcaPeca">Marca da Peça</string>
+    <string name="editTipoCarro">Tipo de Carro</string>
+    <string name="editMarcaCarro">Marca do Carro</string>
+    <string name="editModeloCarro">Modelo do Carro</string>
+    <string name="editAnoModeloCarro">Ano Modelo do Carro</string>
+    <string name="precoPeca">Preco da Peça R$</string>
 
 </resources>

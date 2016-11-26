@@ -7,7 +7,7 @@ import android.widget.TextView;
  * Created by rafael on 23/11/2016.
  */
 
-public class CadastroAuxiliar {
+public class CadastroClienteAuxiliar {
     private TextView editCpfCli;
     private TextView editNomeCli;
     private TextView editRuaCli;
@@ -20,22 +20,22 @@ public class CadastroAuxiliar {
     private TextView editTelCli;
     private TextView editEmailCli;
 
-    public CadastroAuxiliar(Cadastro cadastro) {
-        editCpfCli = (TextView) cadastro.findViewById(R.id.editCpfCli);
-        editNomeCli = (TextView) cadastro.findViewById(R.id.editNomeCli);
-        editRuaCli = (TextView) cadastro.findViewById(R.id.editRuaCli);
-        editNumCli = (TextView) cadastro.findViewById(R.id.editNumCli);
-        editCompleCli = (TextView) cadastro.findViewById(R.id.editCompleCli);
-        editBairroCli = (TextView) cadastro.findViewById(R.id.editBairroCli);
-        editCepCli = (TextView) cadastro.findViewById(R.id.editCepCli);
-        editCidadeCli = (TextView) cadastro.findViewById(R.id.editCidadeCli);
-        spinEstadoCli = (Spinner) cadastro.findViewById(R.id.spinEstadoCli);
-        editTelCli = (TextView) cadastro.findViewById(R.id.editTelCli);
-        editEmailCli = (TextView) cadastro.findViewById(R.id.editEmailCli);
+    public CadastroClienteAuxiliar(CadastroCliente cadastroCliente) {
+        editCpfCli = (TextView) cadastroCliente.findViewById(R.id.editCpfCli);
+        editNomeCli = (TextView) cadastroCliente.findViewById(R.id.editNomeCli);
+        editRuaCli = (TextView) cadastroCliente.findViewById(R.id.editRuaCli);
+        editNumCli = (TextView) cadastroCliente.findViewById(R.id.editNumCli);
+        editCompleCli = (TextView) cadastroCliente.findViewById(R.id.editCompleCli);
+        editBairroCli = (TextView) cadastroCliente.findViewById(R.id.editBairroCli);
+        editCepCli = (TextView) cadastroCliente.findViewById(R.id.editCepCli);
+        editCidadeCli = (TextView) cadastroCliente.findViewById(R.id.editCidadeCli);
+        spinEstadoCli = (Spinner) cadastroCliente.findViewById(R.id.spinEstadoCli);
+        editTelCli = (TextView) cadastroCliente.findViewById(R.id.editTelCli);
+        editEmailCli = (TextView) cadastroCliente.findViewById(R.id.editEmailCli);
     }
 
-    public Spinner retornaSpnner(Cadastro cadastro){
-        return spinEstadoCli = (Spinner) cadastro.findViewById(R.id.spinEstadoCli);
+    public Spinner retornaSpnner(CadastroCliente cadastroCliente){
+        return spinEstadoCli = (Spinner) cadastroCliente.findViewById(R.id.spinEstadoCli);
     }
 
     public void exibeCliente(Cliente clienteAlterar){

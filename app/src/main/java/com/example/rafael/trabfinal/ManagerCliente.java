@@ -18,7 +18,7 @@ import android.widget.ListView;
 import java.util.List;
 
 public class ManagerCliente extends AppCompatActivity {
-    private ListView listOrcamento;
+    private ListView listCliente;
     private Cliente cliente;
 
     @Override
@@ -26,12 +26,12 @@ public class ManagerCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cliente);
 
-        listOrcamento = (ListView) findViewById(R.id.listOrcamento);
+        listCliente = (ListView) findViewById(R.id.listCliente);
 
         //informar à listview para abrir o menu quando clicar
-        registerForContextMenu(listOrcamento);
+        registerForContextMenu(listCliente);
 
-        listOrcamento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             //acesso ao adapter que foi vinculado à listview
             // a lista é uma view é necessário passá-la para ser modificada
@@ -39,13 +39,13 @@ public class ManagerCliente extends AppCompatActivity {
             //informar o id da listview para ser acessada
             public void onItemClick(AdapterView<?> adapter, View view, int posicao, long id) {
                 Cliente clienteClicado = (Cliente) adapter.getItemAtPosition(posicao);
-                Intent irCadastro = new Intent(ManagerCliente.this, Cadastro.class);
+                Intent irCadastro = new Intent(ManagerCliente.this, CadastroCliente.class);
                 irCadastro.putExtra("clienteClicado", clienteClicado);
                 startActivity(irCadastro);
             }
         });
 
-        listOrcamento.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listCliente.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int posicao, long id) {
                 cliente = (Cliente) adapter.getItemAtPosition(posicao);
@@ -132,14 +132,12 @@ public class ManagerCliente extends AppCompatActivity {
 
         ListaClienteAdapter adapter = new ListaClienteAdapter(clientes,this);
 
-
-
-        listOrcamento.setAdapter(adapter);
+        listCliente.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_orcamento,menu);
+        inflater.inflate(R.menu.menu_cliente,menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -149,7 +147,7 @@ public class ManagerCliente extends AppCompatActivity {
 
         switch (itemClicado){
             case R.id.novoCli:
-                Intent irCadastro = new Intent(this, Cadastro.class);
+                Intent irCadastro = new Intent(this, CadastroCliente.class);
                 startActivity(irCadastro);
                 break;
         }

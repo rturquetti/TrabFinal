@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class Cadastro extends AppCompatActivity {
-    private CadastroAuxiliar auxiliar;
+public class CadastroCliente extends AppCompatActivity {
+    private CadastroClienteAuxiliar auxiliar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +22,7 @@ public class Cadastro extends AppCompatActivity {
         Button botaoSalvar = (Button) findViewById(R.id.buttonSalvar);
         Button botaoCancelar = (Button) findViewById(R.id.buttonCancelar);
 
-        auxiliar = new CadastroAuxiliar(this);
+        auxiliar = new CadastroClienteAuxiliar(this);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinEstadosCli, android.R.layout.simple_spinner_item);
         auxiliar.retornaSpnner(this).setAdapter(adapter);
@@ -38,7 +36,7 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cliente cliente = auxiliar.retornaCliente();
-                ClienteDAO dao = new ClienteDAO(Cadastro.this);
+                ClienteDAO dao = new ClienteDAO(CadastroCliente.this);
 
                 if (clienteParaAlterar == null) {
                     if (auxiliar.CampoVazio()){
@@ -59,11 +57,8 @@ public class Cadastro extends AppCompatActivity {
                         finish();
                     }
                 }
-
-
             }
         });
-
         botaoCancelar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
