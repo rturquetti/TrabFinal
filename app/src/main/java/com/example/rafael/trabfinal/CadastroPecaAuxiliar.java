@@ -77,6 +77,10 @@ public class CadastroPecaAuxiliar {
         return imgFotoPeca;
     }
 
+    public void carregaMarcaCarro(String marcaCarro){
+        editMarcaCarro.setText(marcaCarro);
+    }
+
     public void carregaImagem(String caminhoImg){
         peca.setFotoPeca(caminhoImg);
         Bitmap imagem = BitmapFactory.decodeFile(caminhoImg);

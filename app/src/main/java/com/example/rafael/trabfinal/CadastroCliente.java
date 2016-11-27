@@ -27,7 +27,7 @@ public class CadastroCliente extends AppCompatActivity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinEstadosCli, android.R.layout.simple_spinner_item);
         auxiliar.retornaSpnner(this).setAdapter(adapter);
 
-        if(clienteParaAlterar != null){
+       if(clienteParaAlterar != null){
             botaoSalvar.setText("Alterar");
             auxiliar.exibeCliente(clienteParaAlterar);
         }
@@ -37,7 +37,6 @@ public class CadastroCliente extends AppCompatActivity {
             public void onClick(View v) {
                 Cliente cliente = auxiliar.retornaCliente();
                 ClienteDAO dao = new ClienteDAO(CadastroCliente.this);
-
                 if (clienteParaAlterar == null) {
                     if (auxiliar.CampoVazio()){
                         Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();

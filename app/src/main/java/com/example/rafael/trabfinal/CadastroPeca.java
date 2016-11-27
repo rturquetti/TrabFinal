@@ -7,15 +7,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.net.URI;
 
 /**
  * Created by rafael on 24/11/2016.
@@ -24,6 +22,7 @@ import java.net.URI;
 public class CadastroPeca extends AppCompatActivity {
     private CadastroPecaAuxiliar auxiliar;
     private String caminhoImg;
+    //TextView editMarcaCarro;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +31,7 @@ public class CadastroPeca extends AppCompatActivity {
         Intent intent = getIntent();
         final Peca pecaParaAlterar = (Peca) intent.getSerializableExtra("pecaClicado");
 
+        TextView editMarcaCarro = (TextView) findViewById(R.id.editMarcaCarro);
         Button botaoSalvar = (Button) findViewById(R.id.buttonSalvar);
         Button botaoCancelar = (Button) findViewById(R.id.buttonCancelar);
 
@@ -77,6 +77,14 @@ public class CadastroPeca extends AppCompatActivity {
             }
         });
 
+        editMarcaCarro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterMarca.class);
+                startActivityForResult(irLista, 456);
+            }
+        });
+
         final ImageView imgFotoPeca = auxiliar.getImgFotoPeca();
         imgFotoPeca.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,14 +105,22 @@ public class CadastroPeca extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 123){
             if (resultCode == Activity.RESULT_OK){
-                Log.d("apssei aqui 1 "+Activity.RESULT_OK,"");
                 auxiliar.carregaImagem(caminhoImg);
             }
             else {
                 caminhoImg = null;
             }
         }
+
+        if(requestCode == 456){
+            if (resultCode == Activity.RESULT_OK){
+                ObjMarcas marcaClicado = (ObjMarcas) data.getSerializableExtra("marcaClicado");
+                auxiliar.carregaMarcaCarro(marcaClicado.fipe_name.toString());
+            }
+        }
+
     }
 }
