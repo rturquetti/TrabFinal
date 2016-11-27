@@ -22,7 +22,6 @@ import java.io.File;
 public class CadastroPeca extends AppCompatActivity {
     private CadastroPecaAuxiliar auxiliar;
     private String caminhoImg;
-    //TextView editMarcaCarro;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,9 @@ public class CadastroPeca extends AppCompatActivity {
         Intent intent = getIntent();
         final Peca pecaParaAlterar = (Peca) intent.getSerializableExtra("pecaClicado");
 
+        TextView editTipoCarro = (TextView) findViewById(R.id.editTipoCarro);
         TextView editMarcaCarro = (TextView) findViewById(R.id.editMarcaCarro);
+        TextView editModeloCarro = (TextView) findViewById(R.id.editModeloCarro);
         Button botaoSalvar = (Button) findViewById(R.id.buttonSalvar);
         Button botaoCancelar = (Button) findViewById(R.id.buttonCancelar);
 
@@ -77,11 +78,27 @@ public class CadastroPeca extends AppCompatActivity {
             }
         });
 
+        editTipoCarro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterTipo.class);
+                startActivityForResult(irLista, 1011);
+            }
+        });
+
         editMarcaCarro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterMarca.class);
                 startActivityForResult(irLista, 456);
+            }
+        });
+
+        editModeloCarro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterVeiculos.class);
+                startActivityForResult(irLista, 789);
             }
         });
 
@@ -115,6 +132,13 @@ public class CadastroPeca extends AppCompatActivity {
             }
         }
 
+        if(requestCode == 1011){
+            if (resultCode == Activity.RESULT_OK){
+                String tipoClicado = (String) data.getStringExtra("tipoClicado");
+                auxiliar.carregaTipoCarro(tipoClicado.toString());
+            }
+        }
+
         if(requestCode == 456){
             if (resultCode == Activity.RESULT_OK){
                 ObjMarcas marcaClicado = (ObjMarcas) data.getSerializableExtra("marcaClicado");
@@ -122,5 +146,11 @@ public class CadastroPeca extends AppCompatActivity {
             }
         }
 
+        if(requestCode == 789){
+            if (resultCode == Activity.RESULT_OK){
+                ObjVeiculos modeloClicado = (ObjVeiculos) data.getSerializableExtra("veiculoClicado");
+                auxiliar.carregaModeloCarro(modeloClicado.fipe_name.toString());
+            }
+        }
     }
 }

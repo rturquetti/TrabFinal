@@ -55,10 +55,11 @@
 
     <string name="editNomePca">Nome</string>
     <string name="editMarcaPeca">Marca da Peça</string>
-    <string name="editTipoCarro">Tipo de Carro</string>
-    <string name="editMarcaCarro">Marca do Carro</string>
-    <string name="editModeloCarro">Modelo do Carro</string>
-    <string name="editAnoModeloCarro">Ano Modelo do Carro</string>
+    <string name="editTipoCarro">Tipo de Veículo</string>
+    <string name="editMarcaCarro">Marca do Veículo</string>
+    <string name="editModeloCarro">Modelo do Veículo</string>
+    <string name="editAnoModeloCarro">Ano Modelo do Veículo</string>
+    <string name="qtdePeca">Quantidade</string>
     <string name="precoPeca">Preco da Peça R$</string>
 
 </resources>

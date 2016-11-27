@@ -38,12 +38,20 @@
         android:id="@+id/editAnoModeloCarro"
         android:hint="@string/editAnoModeloCarro"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
+    <EditText
+        android:id="@+id/editQtdePeca"
+        android:hint="@string/qtdePeca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
     <EditText
         android:id="@+id/editPrecoPeca"
         android:hint="@string/precoPeca"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
     <LinearLayout
         android:layout_gravity="center"
         android:layout_width="wrap_content"

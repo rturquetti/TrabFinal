@@ -19,6 +19,7 @@ public class CadastroPecaAuxiliar {
     private TextView editMarcaCarro;
     private TextView editModeloCarro;
     private TextView editAnoModeloCarro;
+    private TextView editQtdePeca;
     private TextView editPrecoPeca;
     private Peca peca;
 
@@ -31,6 +32,7 @@ public class CadastroPecaAuxiliar {
         editMarcaCarro = (TextView) cadastroPeca.findViewById(R.id.editMarcaCarro);
         editModeloCarro = (TextView) cadastroPeca.findViewById(R.id.editModeloCarro);
         editAnoModeloCarro = (TextView) cadastroPeca.findViewById(R.id.editAnoModeloCarro);
+        editQtdePeca = (TextView) cadastroPeca.findViewById(R.id.editQtdePeca);
         editPrecoPeca = (TextView) cadastroPeca.findViewById(R.id.editPrecoPeca);
         peca = new Peca();
     }
@@ -43,6 +45,7 @@ public class CadastroPecaAuxiliar {
         editMarcaCarro.setText(pecaAlterar.getMarcaCarro());
         editModeloCarro.setText(pecaAlterar.getModeloCarro());
         editAnoModeloCarro.setText(pecaAlterar.getAnoModeloCarro());
+        editQtdePeca.setText(String.valueOf(pecaAlterar.getQtdePeca()));
         editPrecoPeca.setText(String.valueOf(pecaAlterar.getPreco()));
     }
 
@@ -53,6 +56,7 @@ public class CadastroPecaAuxiliar {
         peca.setMarcaCarro(editMarcaCarro.getText().toString());
         peca.setModeloCarro(editModeloCarro.getText().toString());
         peca.setAnoModeloCarro(editAnoModeloCarro.getText().toString());
+        //peca.setQtdePeca(Integer.parseInt(String.valueOf(editQtdePeca.getText())));
         //peca.setPreco(Double.parseDouble(String.valueOf(editPrecoPeca.getText())));
 
         return peca;
@@ -65,6 +69,7 @@ public class CadastroPecaAuxiliar {
                 ||(editMarcaCarro.getText().toString().equals(""))
                 ||(editModeloCarro.getText().toString().equals(""))
                 ||(editAnoModeloCarro.getText().toString().equals(""))
+                ||(editQtdePeca.getText().toString().equals(""))
                 ||(editPrecoPeca.getText().toString().equals(""))){
             return true;
         }
@@ -77,8 +82,16 @@ public class CadastroPecaAuxiliar {
         return imgFotoPeca;
     }
 
+    public void carregaTipoCarro(String tipoCarro){
+        editTipoCarro.setText(tipoCarro);
+    }
+
     public void carregaMarcaCarro(String marcaCarro){
         editMarcaCarro.setText(marcaCarro);
+    }
+
+    public void carregaModeloCarro(String modeloCarro){
+        editModeloCarro.setText(modeloCarro);
     }
 
     public void carregaImagem(String caminhoImg){
@@ -86,8 +99,6 @@ public class CadastroPecaAuxiliar {
         Bitmap imagem = BitmapFactory.decodeFile(caminhoImg);
         Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem,100,100,true);
 
-
-        Log.d("passei aqui","-----------");
         imgFotoPeca.setImageBitmap(imagemReduzida);
     }
 

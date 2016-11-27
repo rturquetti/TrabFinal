@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Peca implements Serializable{
     Long idPeca;
     String fotoPeca,nomePeca,marcaPeca,tipoCarro,marcaCarro,modeloCarro,anoModeloCarro;
+    int qtdePeca;
     Double preco;
 
     public String toString(){
@@ -48,6 +49,8 @@ public class Peca implements Serializable{
         return anoModeloCarro;
     }
 
+    public int getQtdePeca(){return qtdePeca;}
+
     public Double getPreco() {
         return preco;
     }
@@ -83,6 +86,8 @@ public class Peca implements Serializable{
     public void setAnoModeloCarro(String anoModeloCarro) {
         this.anoModeloCarro = anoModeloCarro;
     }
+
+    public void setQtdePeca(int qtdePeca){this.qtdePeca = qtdePeca;}
 
     public void setPreco(Double preco) {
         this.preco = preco;

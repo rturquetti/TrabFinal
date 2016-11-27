@@ -1,14 +1,24 @@
 package com.example.rafael.trabfinal;
 
+import java.io.Serializable;
+
 /**
  * Created by rafael on 27/11/2016.
  */
 
-public class ObjVeiculos {
+public class ObjVeiculos implements Serializable {
     String fipe_marca,name,marca,id,fipe_name;
 
     public String toString(){
         return fipe_name;
+    }
+
+    public ObjVeiculos(String fipe_marca, String name, String marca, String id, String fipe_name) {
+        this.fipe_marca = fipe_marca;
+        this.name = name;
+        this.marca = marca;
+        this.id = id;
+        this.fipe_name = fipe_name;
     }
 
     public String getFipe_marca() {

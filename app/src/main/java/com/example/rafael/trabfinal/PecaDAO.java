@@ -33,6 +33,7 @@ public class PecaDAO extends SQLiteOpenHelper {
         values.put("marcaCarro",peca.getMarcaCarro());
         values.put("modeloCarro",peca.getModeloCarro());
         values.put("anoModeloCarro",peca.getAnoModeloCarro());
+        values.put("qtdePeca",peca.getQtdePeca());
         values.put("precoPeca",peca.getPreco());
 
         getWritableDatabase().insert("Pecas",null,values);
@@ -48,6 +49,7 @@ public class PecaDAO extends SQLiteOpenHelper {
         values.put("marcaCarro",peca.getMarcaCarro());
         values.put("modeloCarro",peca.getModeloCarro());
         values.put("anoModeloCarro",peca.getAnoModeloCarro());
+        values.put("qtdePeca",peca.getQtdePeca());
         values.put("precoPeca",peca.getPreco());
 
         String[] args = {peca.getIdPeca().toString()};
@@ -61,7 +63,7 @@ public class PecaDAO extends SQLiteOpenHelper {
     }
 
     public List<Peca> getLista(){
-        String[] colunas = {"id","fotoPeca","nomePeca","marcaPeca","tipoCarro","marcaCarro","modeloCarro","anoModeloCarro","precoPeca"};
+        String[] colunas = {"id","fotoPeca","nomePeca","marcaPeca","tipoCarro","marcaCarro","modeloCarro","anoModeloCarro","qtdePeca","precoPeca"};
 
         Cursor cursor = getWritableDatabase().query("Pecas",colunas,null,null,null,null,null);
 
@@ -79,7 +81,8 @@ public class PecaDAO extends SQLiteOpenHelper {
             peca.setMarcaCarro(cursor.getString(5));
             peca.setModeloCarro(cursor.getString(6));
             peca.setAnoModeloCarro(cursor.getString(7));
-            peca.setPreco(cursor.getDouble(8));
+            peca.setQtdePeca(cursor.getInt(8));
+            peca.setPreco(cursor.getDouble(9));
 
             pecas.add(peca);
         }
@@ -91,7 +94,7 @@ public class PecaDAO extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String string = "CREATE TABLE Pecas (id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "fotoPeca TEXT, nomePeca TEXT, marcaPeca TEXT, tipoCarro TEXT, marcaCarro TEXT,"+
-                "modeloCarro TEXT, anoModeloCarro TEXT, precoPeca REAL);";
+                "modeloCarro TEXT, anoModeloCarro TEXT, qtdePeca INTEGER,precoPeca REAL);";
         db.execSQL(string);
     }
     @Override

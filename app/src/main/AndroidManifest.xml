@@ -32,6 +32,12 @@
         <activity android:name=".ManagerAdapterMarca">
 
         </activity>
+        <activity android:name=".ManagerAdapterVeiculos">
+
+        </activity>
+        <activity android:name=".ManagerAdapterTipo">
+
+        </activity>
     </application>
 
 </manifest>
