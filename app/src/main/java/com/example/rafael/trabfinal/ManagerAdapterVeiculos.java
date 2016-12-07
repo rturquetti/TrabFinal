@@ -23,12 +23,18 @@ public class ManagerAdapterVeiculos extends Activity {
     ModeloTask mTask;
     ProgressBar mProgressBar;
     ListView listVeiculos;
+    String tipo;
+    ObjMarcas marca;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_peca);
 
         listVeiculos = (ListView)findViewById(R.id.listPeca);
+
+        Intent irHttp = getIntent();
+        tipo = irHttp.getExtras().getString("tipoClicado");
+        marca = (ObjMarcas) irHttp.getSerializableExtra("marcaClicado");
         iniciarDownload();
 
         listVeiculos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,7 +77,7 @@ public class ManagerAdapterVeiculos extends Activity {
 
         @Override
         protected List<ObjVeiculos> doInBackground(Void... params){
-            return VeiculoInfoHttp.carregarObjVeiculosJson();
+            return VeiculoInfoHttp.carregarObjVeiculosJson(tipo,marca);
         }
 
         @Override

@@ -4,11 +4,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,9 +20,9 @@ import java.util.List;
  */
 
 public class PecaInfoHttp {
-    //public static final String MARCAS_URL = "http://fipeapi.appspot.com/api/1/carros/marcas.json";
+    public static final String MARCAS_URL = "http://fipeapi.appspot.com/api/1/";
 
-    public static final String MARCAS_URL = "http://www.codifique.net/wsCM/MarcasRafael.json";
+    //public static final String MARCAS_URL = "http://www.codifique.net/wsCM/MarcasRafael.json";
     private static HttpURLConnection conectar(String urlArquivo) throws IOException {
 
         final int SEGUNDOS = 1000; //apenas para facilitar a conversão para segundos dos parametros
@@ -46,14 +44,17 @@ public class PecaInfoHttp {
         return  (info != null && info.isConnected());
     }
 
-    public static List<ObjMarcas> carregarObjMarcasJson(){
+    public static List<ObjMarcas> carregarObjMarcasJson(String peca){
         try{
-            HttpURLConnection conexao = conectar(MARCAS_URL);
+            HttpURLConnection conexao = conectar(MARCAS_URL +peca+"/marcas.json");
+
+            Log.d("passei http  " + MARCAS_URL +peca,"/marcas.json");
 
             int resposta = conexao.getResponseCode(); //Código do protocolo http. Exemplo: 404 arquivo nao encontrado
             if(resposta == HttpURLConnection.HTTP_OK) {
-                InputStream is = conexao.getInputStream();
-                JSONObject json = new JSONObject(bytesParaString(is));
+                InputStream is = (InputStream) conexao.getContent();
+                String json = new String(bytesParaString(is));
+                is.close();
                 return lerJsonObjMarcas(json);
             }
         }
@@ -64,25 +65,25 @@ public class PecaInfoHttp {
         return null;
     }
 
-    public static List<ObjMarcas> lerJsonObjMarcas(JSONObject json) throws JSONException {
+    public static List<ObjMarcas> lerJsonObjMarcas(String json) throws JSONException {
 
-        List<ObjMarcas> listajsonObjMarcas = new ArrayList<ObjMarcas>();
+        List<ObjMarcas> ListMarcas= new ArrayList<ObjMarcas>();
 
-        JSONArray jsonListaObjMarcas = json.getJSONArray("marcas");
-        for(int i=0; i < jsonListaObjMarcas.length(); i++) {
-            JSONObject jsonObjMarcas = jsonListaObjMarcas.getJSONObject(i);
+        JSONArray marcasJson = new JSONArray(json);
+        JSONObject marca;
+        for(int i=0; i < marcasJson.length(); i++) {
+            marca = new JSONObject(marcasJson.getString(i));
 
-            ObjMarcas a = new ObjMarcas(
-                    jsonObjMarcas.getString("name"),
-                    jsonObjMarcas.getString("fipe_name"),
-                    jsonObjMarcas.getString("order"),
-                    jsonObjMarcas.getString("key"),
-                    jsonObjMarcas.getString("id")
-            );
+            ObjMarcas objetoMarca = new ObjMarcas();
+            objetoMarca.setFipe_name(marca.getString("fipe_name"));
+            objetoMarca.setName(marca.getString("name"));
+            objetoMarca.setOrder(marca.getString("order"));
+            objetoMarca.setKey(marca.getString("key"));
+            objetoMarca.setId(marca.getString("id"));
 
-            listajsonObjMarcas.add(a);
+            ListMarcas.add(objetoMarca);
         }
-        return listajsonObjMarcas;
+        return ListMarcas;
     }
 
     private static String bytesParaString(InputStream is) throws IOException {
@@ -96,6 +97,7 @@ public class PecaInfoHttp {
             //copia a quantidade de bytes lidos de buffer para bufferAlunos
             bufferAlunos.write(buffer, 0, qtdBytesLidos);
         }
+        Log.d("marcas: "+bufferAlunos.toString(),"---");
         return new String(bufferAlunos.toByteArray(), "UTF-8");
     }
 }

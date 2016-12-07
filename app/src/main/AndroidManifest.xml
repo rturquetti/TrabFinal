@@ -12,31 +12,38 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ManagerCliente">
 
-        </activity>
         <activity android:name=".CadastroCliente"
-            android:label="@string/actCadastrarCliente">
-        </activity>
-        <activity android:name=".CadastroPeca"
-            android:label="@string/actCadastrarPeca">
+            android:label="@string/actCadastrarCliente"></activity>
 
-        </activity>
-        <activity android:name=".ManagerPeca">
+        <activity android:name=".CadastroPeca"
+            android:label="@string/actCadastrarPeca"></activity>
+
+        <activity android:name=".CadastroOrcamento"
+            android:label="@string/actCadastrarOrcamento"></activity>
+
+        <activity android:name=".ManagerCliente"
+            android:label="@string/actListaClientes"></activity>
+
+        <activity android:name=".ManagerPeca"
+            android:label="@string/actListaPecas"></activity>
+
+        <activity android:name=".ManagerAdapterMarca"
+            android:label="@string/actListaMarcas"></activity>
+
+        <activity android:name=".ManagerAdapterVeiculos"
+            android:label="@string/actListaVeiculos"></activity>
+
+        <activity android:name=".ManagerAdapterTipo"
+            android:label="@string/actListaTipos"></activity>
+
+
+        <activity android:name=".ManagerOrcamento">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ManagerAdapterMarca">
-
-        </activity>
-        <activity android:name=".ManagerAdapterVeiculos">
-
-        </activity>
-        <activity android:name=".ManagerAdapterTipo">
-
         </activity>
     </application>
 

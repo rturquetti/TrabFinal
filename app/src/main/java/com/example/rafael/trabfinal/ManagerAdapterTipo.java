@@ -26,7 +26,7 @@ public class ManagerAdapterTipo extends Activity{
 
         listTipos = (ListView) findViewById(R.id.listPeca);
 
-        String[] tipos = {"Carro", "Moto", "Caminhão"};
+        String[] tipos = {"carros", "motos", "caminhoes"};
 
         ArrayList<String> tiposVeiculos = new ArrayList<String>();
         int layaout = android.R.layout.simple_list_item_1;

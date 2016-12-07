@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +23,9 @@ import java.io.File;
 public class CadastroPeca extends AppCompatActivity {
     private CadastroPecaAuxiliar auxiliar;
     private String caminhoImg;
+    TextView editTipoCarro;
+    TextView editMarcaCarro;
+    ObjMarcas marcaClicado;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +34,8 @@ public class CadastroPeca extends AppCompatActivity {
         Intent intent = getIntent();
         final Peca pecaParaAlterar = (Peca) intent.getSerializableExtra("pecaClicado");
 
-        TextView editTipoCarro = (TextView) findViewById(R.id.editTipoCarro);
-        TextView editMarcaCarro = (TextView) findViewById(R.id.editMarcaCarro);
+        editTipoCarro = (TextView) findViewById(R.id.editTipoCarro);
+        editMarcaCarro = (TextView) findViewById(R.id.editMarcaCarro);
         TextView editModeloCarro = (TextView) findViewById(R.id.editModeloCarro);
         Button botaoSalvar = (Button) findViewById(R.id.buttonSalvar);
         Button botaoCancelar = (Button) findViewById(R.id.buttonCancelar);
@@ -41,6 +45,7 @@ public class CadastroPeca extends AppCompatActivity {
         if (pecaParaAlterar != null) {
             botaoSalvar.setText("Alterar");
             auxiliar.exibePeca(pecaParaAlterar);
+            auxiliar.carregaImagem(pecaParaAlterar.getFotoPeca());
         }
 
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +95,7 @@ public class CadastroPeca extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterMarca.class);
+                irLista.putExtra("tipoClicado", editTipoCarro.getText().toString());
                 startActivityForResult(irLista, 456);
             }
         });
@@ -98,6 +104,17 @@ public class CadastroPeca extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterVeiculos.class);
+                irLista.putExtra("tipoClicado", editTipoCarro.getText().toString());
+
+                Log.d("Mandando tipo: "+editTipoCarro.getText().toString(),"//");
+
+
+                //Intent irmarca = new Intent(CadastroPeca.this,ManagerAdapterVeiculos.class);
+                irLista.putExtra("marcaClicado",marcaClicado);
+
+                Log.d("Mandando marca: "+marcaClicado.getId(),"\\");
+
+                //irLista.putExtra("marcaClicado", editMarcaCarro.getText().toString());
                 startActivityForResult(irLista, 789);
             }
         });
@@ -141,7 +158,7 @@ public class CadastroPeca extends AppCompatActivity {
 
         if(requestCode == 456){
             if (resultCode == Activity.RESULT_OK){
-                ObjMarcas marcaClicado = (ObjMarcas) data.getSerializableExtra("marcaClicado");
+                marcaClicado = (ObjMarcas) data.getSerializableExtra("marcaClicado");
                 auxiliar.carregaMarcaCarro(marcaClicado.fipe_name.toString());
             }
         }

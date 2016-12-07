@@ -2,11 +2,18 @@
     <string name="app_name">Orçamento</string>
     <string name="actCadastrarCliente">Cadastrar Cliente</string>
     <string name="actCadastrarPeca">Cadastrar Peça</string>
+    <string name="actCadastrarOrcamento">Cadastrar Orçamento</string>
+    <string name="actListaPecas">Lista de Peças</string>
+    <string name="actListaClientes">Lista de Clientes</string>
+    <string name="actListaTipos">Tipos de Veículos</string>
+    <string name="actListaVeiculos">Veículos</string>
+    <string name="actListaMarcas">Marcas de Veículos</string>
+
 
     <string name="novoPed">Novo Pedido</string>
     <string name="novoCli">Novo Cliente</string>
     <string name="novaPeca">Nova Peça</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_opcoes">Opções</string>
 
     <string-array name="spinEstadosCli">
         <item id="estado">Estado</item>
@@ -61,5 +68,18 @@
     <string name="editAnoModeloCarro">Ano Modelo do Veículo</string>
     <string name="qtdePeca">Quantidade</string>
     <string name="precoPeca">Preco da Peça R$</string>
+
+
+    <string name="editClienteOrc">Cliente</string>
+    <string name="textViewOrc">Produtos no Orçamento</string>
+    <string name="editPrecoOrc">Preço R$</string>
+    <string name="novoOrcamento">Novo Orçamento</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="quantidade">Quantidade</string>
+    <string name="qtde">Qtde</string>
+    <string name="nomeProdOrc">Nome Produto</string>
+    <string name="valorProdOrc">Valor Und.</string>
 
 </resources>

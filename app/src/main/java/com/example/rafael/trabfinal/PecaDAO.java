@@ -25,9 +25,7 @@ public class PecaDAO extends SQLiteOpenHelper {
     public void salva(Peca peca){
         ContentValues values = new ContentValues();
         values.put("fotoPeca",peca.getFotoPeca());
-        Log.d("fotopeçaSalva "+peca.getFotoPeca(),"");
         values.put("nomePeca",peca.getNomePeca());
-        Log.d("nomepeçaSalva "+peca.getFotoPeca(),"");
         values.put("marcaPeca",peca.getMarcaPeca());
         values.put("tipoCarro",peca.getTipoCarro());
         values.put("marcaCarro",peca.getMarcaCarro());

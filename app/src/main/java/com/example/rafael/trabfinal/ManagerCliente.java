@@ -39,9 +39,10 @@ public class ManagerCliente extends AppCompatActivity {
             //informar o id da listview para ser acessada
             public void onItemClick(AdapterView<?> adapter, View view, int posicao, long id) {
                 Cliente clienteClicado = (Cliente) adapter.getItemAtPosition(posicao);
-                Intent irCadastro = new Intent(ManagerCliente.this, CadastroCliente.class);
-                irCadastro.putExtra("clienteClicado", clienteClicado);
-                startActivity(irCadastro);
+                Intent irOrcamento = new Intent(ManagerCliente.this,CadastroOrcamento.class);
+                irOrcamento.putExtra("clienteClicado",clienteClicado);
+                setResult(RESULT_OK,irOrcamento);
+                finish();
             }
         });
 
@@ -93,6 +94,19 @@ public class ManagerCliente extends AppCompatActivity {
                 return false;
             }
         });
+
+        MenuItem editar = menu.add("Editar");
+        editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent irCadastro = new Intent(ManagerCliente.this, CadastroCliente.class);
+                irCadastro.putExtra("clienteClicado", cliente);
+                startActivity(irCadastro);
+
+                return false;
+            }
+        });
+
         MenuItem deletar = menu.add("Deletar");
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

@@ -4,11 +4,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,9 +20,9 @@ import java.util.List;
  */
 
 public class VeiculoInfoHttp {
-    //public static final String MARCAS_URL = "http://fipeapi.appspot.com/api/1/carros/marcas.json";
+    public static final String MARCAS_URL = "http://fipeapi.appspot.com/api/1/";
 
-    public static final String MARCAS_URL = "http://www.codifique.net/wsCM/VeiculosRafael.json";
+    //public static final String MARCAS_URL = "http://www.codifique.net/wsCM/VeiculosRafael.json";
     private static HttpURLConnection conectar(String urlArquivo) throws IOException {
 
         final int SEGUNDOS = 1000; //apenas para facilitar a conversão para segundos dos parametros
@@ -46,14 +44,18 @@ public class VeiculoInfoHttp {
         return  (info != null && info.isConnected());
     }
 
-    public static List<ObjVeiculos> carregarObjVeiculosJson(){
+    public static List<ObjVeiculos> carregarObjVeiculosJson(String tipo, ObjMarcas marca){
+        //http://fipeapi.appspot.com/api/1/carros/veiculos/21.json
+
         try{
-            HttpURLConnection conexao = conectar(MARCAS_URL);
+            HttpURLConnection conexao = conectar(MARCAS_URL+tipo+"/veiculos/"+marca.getId().toString()+".json");
+            Log.d("HTTP: "+MARCAS_URL+tipo+"/veiculos/"+marca.getId().toString()," html");
 
             int resposta = conexao.getResponseCode(); //Código do protocolo http. Exemplo: 404 arquivo nao encontrado
             if(resposta == HttpURLConnection.HTTP_OK) {
-                InputStream is = conexao.getInputStream();
-                JSONObject json = new JSONObject(bytesParaString(is));
+                InputStream is = (InputStream) conexao.getInputStream();
+                String json = new String(bytesParaString(is));
+                //JSONObject json = new JSONObject(bytesParaString(is));
                 return lerJsonObjVeiculos(json);
             }
         }
@@ -64,25 +66,28 @@ public class VeiculoInfoHttp {
         return null;
     }
 
-    public static List<ObjVeiculos> lerJsonObjVeiculos(JSONObject json) throws JSONException {
+    public static List<ObjVeiculos> lerJsonObjVeiculos(String json) throws JSONException {
 
-        List<ObjVeiculos> listajsonObjVeiculos = new ArrayList<ObjVeiculos>();
+        List<ObjVeiculos> listaVeiculos = new ArrayList<ObjVeiculos>();
 
-        JSONArray jsonListaObjVeiculos = json.getJSONArray("veiculos");
-        for(int i=0; i < jsonListaObjVeiculos.length(); i++) {
-            JSONObject jsonObjVeiculos = jsonListaObjVeiculos.getJSONObject(i);
+        //JSONArray jsonListaObjVeiculos = json.getJSONArray("veiculos");
+        JSONArray veiculosJson = new JSONArray(json);
+        JSONObject veiculo;
 
-            ObjVeiculos a = new ObjVeiculos(
-                    jsonObjVeiculos.getString("fipe_marca"),
-                    jsonObjVeiculos.getString("name"),
-                    jsonObjVeiculos.getString("marca"),
-                    jsonObjVeiculos.getString("id"),
-                    jsonObjVeiculos.getString("fipe_name")
-            );
+        for(int i=0; i < veiculosJson.length(); i++) {
+            //JSONObject jsonObjVeiculos = jsonListaObjVeiculos.getJSONObject(i);
+            veiculo = new JSONObject(veiculosJson.getString(i));
 
-            listajsonObjVeiculos.add(a);
+            ObjVeiculos objetoVeiculo = new ObjVeiculos();
+            objetoVeiculo.setFipe_marca(veiculo.getString("fipe_marca"));
+            objetoVeiculo.setName(veiculo.getString("name"));
+            objetoVeiculo.setMarca(veiculo.getString("marca"));
+            objetoVeiculo.setId(veiculo.getString("id"));
+            objetoVeiculo.setFipe_name(veiculo.getString("fipe_name"));
+
+            listaVeiculos.add(objetoVeiculo);
         }
-        return listajsonObjVeiculos;
+        return listaVeiculos;
     }
 
     private static String bytesParaString(InputStream is) throws IOException {

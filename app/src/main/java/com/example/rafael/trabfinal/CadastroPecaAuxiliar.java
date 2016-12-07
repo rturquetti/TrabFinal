@@ -32,8 +32,6 @@ public class CadastroPecaAuxiliar {
         editMarcaCarro = (TextView) cadastroPeca.findViewById(R.id.editMarcaCarro);
         editModeloCarro = (TextView) cadastroPeca.findViewById(R.id.editModeloCarro);
         editAnoModeloCarro = (TextView) cadastroPeca.findViewById(R.id.editAnoModeloCarro);
-        editQtdePeca = (TextView) cadastroPeca.findViewById(R.id.editQtdePeca);
-        editPrecoPeca = (TextView) cadastroPeca.findViewById(R.id.editPrecoPeca);
         peca = new Peca();
     }
 
@@ -45,8 +43,8 @@ public class CadastroPecaAuxiliar {
         editMarcaCarro.setText(pecaAlterar.getMarcaCarro());
         editModeloCarro.setText(pecaAlterar.getModeloCarro());
         editAnoModeloCarro.setText(pecaAlterar.getAnoModeloCarro());
-        editQtdePeca.setText(String.valueOf(pecaAlterar.getQtdePeca()));
-        editPrecoPeca.setText(String.valueOf(pecaAlterar.getPreco()));
+        //editQtdePeca.setText(String.valueOf(pecaAlterar.getQtdePeca()));
+        //editPrecoPeca.setText(String.valueOf(pecaAlterar.getPreco()));
     }
 
     public Peca retornaPeca() {
@@ -68,9 +66,7 @@ public class CadastroPecaAuxiliar {
                 ||(editTipoCarro.getText().toString().equals(""))
                 ||(editMarcaCarro.getText().toString().equals(""))
                 ||(editModeloCarro.getText().toString().equals(""))
-                ||(editAnoModeloCarro.getText().toString().equals(""))
-                ||(editQtdePeca.getText().toString().equals(""))
-                ||(editPrecoPeca.getText().toString().equals(""))){
+                ||(editAnoModeloCarro.getText().toString().equals(""))){
             return true;
         }
         else {
@@ -95,11 +91,13 @@ public class CadastroPecaAuxiliar {
     }
 
     public void carregaImagem(String caminhoImg){
-        peca.setFotoPeca(caminhoImg);
-        Bitmap imagem = BitmapFactory.decodeFile(caminhoImg);
-        Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem,100,100,true);
+        if (caminhoImg != null) {
+            peca.setFotoPeca(caminhoImg);
+            Bitmap imagem = BitmapFactory.decodeFile(caminhoImg);
+            Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
 
-        imgFotoPeca.setImageBitmap(imagemReduzida);
+            imgFotoPeca.setImageBitmap(imagemReduzida);
+        }
     }
 
 }

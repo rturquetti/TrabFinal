@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +24,17 @@ public class ManagerAdapterMarca extends Activity {
     MarcaTask mTask;
     ProgressBar mProgressBar;
     ListView listMarcas;
+    String marcaTipo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_peca);
 
         listMarcas = (ListView)findViewById(R.id.listPeca);
+
+        Intent irHttp = getIntent();
+        marcaTipo = irHttp.getExtras().getString("tipoClicado");
+
         iniciarDownload();
 
         listMarcas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -41,7 +47,6 @@ public class ManagerAdapterMarca extends Activity {
                 ObjMarcas marcaClicado = (ObjMarcas) adapter.getItemAtPosition(posicao);
                 Intent irCadastro = new Intent(ManagerAdapterMarca.this, CadastroPeca.class);
                 irCadastro.putExtra("marcaClicado", marcaClicado);
-                Log.d("RETORNO LISTA"+marcaClicado.name.toString(),"+");
                 setResult(RESULT_OK,irCadastro);
                 finish();
             }
@@ -72,18 +77,18 @@ public class ManagerAdapterMarca extends Activity {
 
         @Override
         protected List<ObjMarcas> doInBackground(Void... params){
-            return PecaInfoHttp.carregarObjMarcasJson();
+            return PecaInfoHttp.carregarObjMarcasJson(marcaTipo);
         }
 
         @Override
-        protected void onPostExecute(List<ObjMarcas> marcas)
+        protected void onPostExecute(List<ObjMarcas> marcasDeCarros)
         {
             progress.dismiss();
 
-            ArrayList<ObjMarcas>marcasDeCarros = new ArrayList<ObjMarcas>();
-            marcasDeCarros.addAll(marcas);
+            ArrayList<ObjMarcas> marcas = new ArrayList<ObjMarcas>();
+            marcas.addAll(marcasDeCarros);
             int layaout = android.R.layout.simple_list_item_1;
-            ArrayAdapter<ObjMarcas> adapter = new ArrayAdapter<ObjMarcas>(ManagerAdapterMarca.this, layaout ,marcasDeCarros);
+            ArrayAdapter<ObjMarcas> adapter = new ArrayAdapter<ObjMarcas>(ManagerAdapterMarca.this, layaout ,marcas);
             listMarcas.setAdapter(adapter);
         }
     }
