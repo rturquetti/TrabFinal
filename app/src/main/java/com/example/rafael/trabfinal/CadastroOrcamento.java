@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class CadastroOrcamento extends AppCompatActivity {
     private CadastroOrcamentoAuxiliar auxiliar;
     ListView listPecasOrc;
+    private TextView textPrecoTotalOrc,textPrecoOrc;
     ArrayList<Peca> pecas = new ArrayList<Peca>();
-    ManagerPecaOrcAdapter linhaOrc = new ManagerPecaOrcAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +42,15 @@ public class CadastroOrcamento extends AppCompatActivity {
         TextView editDataHora = (TextView) findViewById(R.id.textDataHora);
         EditText editClienteOrc = (EditText) findViewById(R.id.editClienteOrc);
         listPecasOrc = (ListView) findViewById(R.id.listPecasOrc);
-        EditText editPrecoOrc = (EditText) findViewById(R.id.editPrecoOrc);
+        textPrecoTotalOrc = (TextView) findViewById(R.id.textPrecoTotalOrc);
         ImageView imgAddPeca = (ImageView) findViewById(R.id.imgAddPeca);
+        textPrecoOrc = (TextView) findViewById(R.id.textPrecoOrc);
         Button botaoSalvar = (Button) findViewById(R.id.buttonSalvar);
         Button botaoCancelar = (Button) findViewById(R.id.buttonCancelar);
 
+
         auxiliar = new CadastroOrcamentoAuxiliar(this);
+
 
         if (orcamentoParaAlterar != null) {
             botaoSalvar.setText("Alterar");
@@ -120,16 +123,35 @@ public class CadastroOrcamento extends AppCompatActivity {
         if(requestCode == 1113){
             if (resultCode == Activity.RESULT_OK){
                 Peca pecaClicada = (Peca) data.getSerializableExtra("pecaClicado");
-                linhaOrc.atualizaLista(listPecasOrc, pecaClicada);
-                /*
+                //String quantidade = data.getStringExtra("quantidade");
+                //String valor = data.getStringExtra("valor");
+                //linhaOrc.atualizaLista(listPecasOrc, pecaClicada);
+                /**/
                 Log.d("peçaClicada"+pecaClicada,"ret");
+                Log.d("quantidadepeçaClicada"+pecaClicada.getQtdePeca(),"ret");
+                Log.d("valorpeçaClicada"+pecaClicada.getPreco(),"ret");
 
                 pecas.add(pecaClicada);
+
+                int pecaQuantidade = 0;
+                Double pecaValorUni = 0.0;
+                Double pecavalorTotal = 0.0;
+                for(int i=0;i<pecas.size();i++){
+                    pecaQuantidade = pecas.get(i).getQtdePeca();
+                    pecaValorUni = pecas.get(i).getPreco();
+                    pecavalorTotal += pecaQuantidade *pecaValorUni;
+                }
+
+                Log.d("valor total: "+pecavalorTotal.toString(),"ret");
 
                 ListaPecaOrcAdapter adapter = new ListaPecaOrcAdapter(pecas,this);
 
                 listPecasOrc.setAdapter(adapter);
-*/
+
+                //editPrecoOrc.setText(pecavalorTotal.toString());
+                auxiliar.carregaPreco(String.valueOf(pecavalorTotal));
+
+
             }
         }
     }

@@ -2,19 +2,24 @@ package com.example.rafael.trabfinal;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,7 +33,6 @@ import java.util.List;
 public class ManagerPeca extends AppCompatActivity {
     private ListView listPeca;
     private Peca peca;
-    private AlertDialog alerta;
     private Peca pecaClicado;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,13 @@ public class ManagerPeca extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int posicao, long id) {
                 pecaClicado = (Peca) adapter.getItemAtPosition(posicao);
-                exemplo_simples();
+                pegaInfo();
+                //Intent irCadastro = new Intent(ManagerPeca.this, AdicionarPecaOrc.class);
+                //irCadastro.putExtra("pecaClicado", pecaClicado);
+                //setResult(RESULT_OK,irCadastro);
+                //startActivityForResult(irCadastro);
+                //finish();
+
             }
         });
         listPeca.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -130,25 +140,68 @@ public class ManagerPeca extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void exemplo_simples() {
-        //Cria o gerador do AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+    public void pegaInfo() {
+        LayoutInflater inflater = getLayoutInflater();
+
+        View dialoglayout = inflater.inflate(R.layout.dialog, null);
+
+        final EditText qtdDialog = (EditText) dialoglayout.findViewById(R.id.qtdDialog);
+        final EditText valorDialog = (EditText) dialoglayout.findViewById(R.id.valorDialog);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ManagerPeca.this);
+        builder.setView(dialoglayout);
+        builder.setTitle("Informe");
         builder.setCancelable(false);
-        //define o titulo
-        builder.setTitle(R.string.quantidade);
-        //define a mensagem
-        //builder.setMessage("Qualifique este software");
-        final EditText input = new EditText(this);
-        builder.setView(input);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        //define um botão como positivo
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                //Toast.makeText(ManagerPeca.this, "positivo=" + input.getText().toString(), Toast.LENGTH_SHORT).show();
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 Intent irCadastro = new Intent(ManagerPeca.this, CadastroOrcamento.class);
                 irCadastro.putExtra("pecaClicado", pecaClicado);
                 setResult(RESULT_OK,irCadastro);
+
+                pecaClicado.setQtdePeca(Integer.parseInt(String.valueOf(qtdDialog.getText().toString())));
+                pecaClicado.setPreco(Double.parseDouble(String.valueOf(valorDialog.getText().toString())));
+
+                Log.d("peçaMandada"+pecaClicado.getNomePeca(),"ret");
+                Log.d("quantidadepeçaMandada"+pecaClicado.getQtdePeca(),"ret");
+                Log.d("valorpeçaMandada"+pecaClicado.getPreco(),"ret");
                 finish();
+            }
+        });
+        builder.show();
+    }
+
+/*   public void pegaInfo() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setCancelable(false);
+        builder.setTitle("Info");
+        builder.setView(inflater.inflate(R.layout.dialog, null));
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                //valorPeca = input.getText().toString();
+                //Toast.makeText(ManagerPeca.this, "positivo=" + input.getText().toString(), Toast.LENGTH_SHORT).show();
+
+
+
+
+                //Log.d("quatidade passada: "+quantidadeNoDialog.getText().toString(),"//");
+                //Log.d("valor passado: "+valorNoDialog.getText().toString(),"//");
+//                Intent irCadastro = new Intent(ManagerPeca.this, CadastroOrcamento.class);
+//                irCadastro.putExtra("pecaClicado", pecaClicado);
+//                irCadastro.putExtra("quantidade",qtdePeca);
+//                irCadastro.putExtra("valor",valorPeca);
+//                setResult(RESULT_OK,irCadastro);
+//                finish();
             }
         });
         //define um botão como negativo.
@@ -156,10 +209,10 @@ public class ManagerPeca extends AppCompatActivity {
             public void onClick(DialogInterface arg0, int arg1) {
             }
         });
-        //cria o AlertDialog
-        alerta = builder.create();
-        //Exibe
-        alerta.show();
+
+
+        builder.show();
     }
+    */
 }
 

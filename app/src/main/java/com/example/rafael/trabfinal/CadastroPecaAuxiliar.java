@@ -23,7 +23,6 @@ public class CadastroPecaAuxiliar {
     private TextView editPrecoPeca;
     private Peca peca;
 
-
     public CadastroPecaAuxiliar(CadastroPeca cadastroPeca) {
         imgFotoPeca = (ImageView) cadastroPeca.findViewById(R.id.imgFotoPeca);
         editNomePeca = (TextView) cadastroPeca.findViewById(R.id.editNomePeca);
@@ -56,6 +55,31 @@ public class CadastroPecaAuxiliar {
         peca.setAnoModeloCarro(editAnoModeloCarro.getText().toString());
         //peca.setQtdePeca(Integer.parseInt(String.valueOf(editQtdePeca.getText())));
         //peca.setPreco(Double.parseDouble(String.valueOf(editPrecoPeca.getText())));
+
+        return peca;
+    }
+
+    public void exibePecaOrc(Peca pecaAlterar){
+        peca = pecaAlterar;
+        editNomePeca.setText(pecaAlterar.getNomePeca());
+        editMarcaPeca.setText(pecaAlterar.getMarcaPeca());
+        editTipoCarro.setText(pecaAlterar.getTipoCarro());
+        editMarcaCarro.setText(pecaAlterar.getMarcaCarro());
+        editModeloCarro.setText(pecaAlterar.getModeloCarro());
+        editAnoModeloCarro.setText(pecaAlterar.getAnoModeloCarro());
+        editQtdePeca.setText(String.valueOf(pecaAlterar.getQtdePeca()));
+        editPrecoPeca.setText(String.valueOf(pecaAlterar.getPreco()));
+    }
+
+    public Peca retornaPecaOrc() {
+        peca.setNomePeca(editNomePeca.getText().toString());
+        peca.setMarcaPeca(editMarcaPeca.getText().toString());
+        peca.setTipoCarro(editTipoCarro.getText().toString());
+        peca.setMarcaCarro(editMarcaCarro.getText().toString());
+        peca.setModeloCarro(editModeloCarro.getText().toString());
+        peca.setAnoModeloCarro(editAnoModeloCarro.getText().toString());
+        peca.setQtdePeca(Integer.parseInt(String.valueOf(editQtdePeca.getText())));
+        peca.setPreco(Double.parseDouble(String.valueOf(editPrecoPeca.getText())));
 
         return peca;
     }

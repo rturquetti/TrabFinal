@@ -71,8 +71,9 @@
             android:text="@string/editPrecoOrc"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
-        <EditText
-            android:layout_toRightOf="@+id/editPrecoOrc"
+        <TextView
+            android:layout_toRightOf="@+id/textPrecoOrc"
+            android:id="@+id/textPrecoTotalOrc"
             android:textSize="20sp"
             android:layout_width="150dp"
             android:layout_height="wrap_content" />

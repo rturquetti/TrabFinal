@@ -78,8 +78,12 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="quantidade">Quantidade</string>
+    <string name="adicionar">Adicionar</string>
     <string name="qtde">Qtde</string>
     <string name="nomeProdOrc">Nome Produto</string>
     <string name="valorProdOrc">Valor Und.</string>
+    <string name="valorDialog">Valor do Produto</string>
+    <string name="addQtdePecaOrcamento">Adicione a Quantidade</string>
+    <string name="addValorPecaOrcamento">Adicione o Valor</string>
 
 </resources>

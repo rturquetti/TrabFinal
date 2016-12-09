@@ -1,10 +1,12 @@
 package com.example.rafael.trabfinal;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
 public class ListaPecaOrcAdapter extends BaseAdapter{
     private List<Peca> pecas;
     private Activity activity;
+    Peca peca;
+    //EditText qtdeLinhaOrc, valorLinhaOrc;
 
     public ListaPecaOrcAdapter(List<Peca> pecas, Activity activity) {
         this.pecas = pecas;
@@ -40,16 +44,17 @@ public class ListaPecaOrcAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Peca peca = pecas.get(position);
+        peca = pecas.get(position);
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View linha = inflater.inflate(R.layout.activity_linha_prod_orc,null);
 
         TextView qtdeLinhaOrc = (TextView)linha.findViewById(R.id.qtdePecaOrc);
-        qtdeLinhaOrc.setText("");
         TextView nomeLinhaOrc = (TextView)linha.findViewById(R.id.nomePecaOrc);
-        nomeLinhaOrc.setText(peca.getNomePeca());
         TextView valorLinhaOrc = (TextView)linha.findViewById(R.id.valorPecaOrc);
+
+        qtdeLinhaOrc.setText(String.valueOf(peca.getQtdePeca()));
+        nomeLinhaOrc.setText(peca.getNomePeca());
         valorLinhaOrc.setText(peca.getPreco().toString());
 
         return linha;

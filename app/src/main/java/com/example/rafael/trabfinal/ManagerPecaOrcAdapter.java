@@ -74,6 +74,9 @@ public class ManagerPecaOrcAdapter extends AppCompatActivity {
 
 
 */
+
+
+
         pecas.add(pecaClicada);
 
         ListaPecaOrcAdapter adapter = new ListaPecaOrcAdapter(pecas,this);

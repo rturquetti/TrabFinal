@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,16 +106,7 @@ public class CadastroPeca extends AppCompatActivity {
             public void onClick(View v) {
                 Intent irLista = new Intent(CadastroPeca.this,ManagerAdapterVeiculos.class);
                 irLista.putExtra("tipoClicado", editTipoCarro.getText().toString());
-
-                Log.d("Mandando tipo: "+editTipoCarro.getText().toString(),"//");
-
-
-                //Intent irmarca = new Intent(CadastroPeca.this,ManagerAdapterVeiculos.class);
                 irLista.putExtra("marcaClicado",marcaClicado);
-
-                Log.d("Mandando marca: "+marcaClicado.getId(),"\\");
-
-                //irLista.putExtra("marcaClicado", editMarcaCarro.getText().toString());
                 startActivityForResult(irLista, 789);
             }
         });
@@ -124,15 +116,10 @@ public class CadastroPeca extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent irCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
                 caminhoImg = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
-
                 File arquivo = new File(caminhoImg);
-
                 Uri localImage = Uri.fromFile(arquivo);
-
                 irCamera.putExtra(MediaStore.EXTRA_OUTPUT, localImage);
-
                 startActivityForResult(irCamera, 123);
             }
         });

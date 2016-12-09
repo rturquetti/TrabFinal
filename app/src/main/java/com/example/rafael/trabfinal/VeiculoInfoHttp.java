@@ -45,8 +45,6 @@ public class VeiculoInfoHttp {
     }
 
     public static List<ObjVeiculos> carregarObjVeiculosJson(String tipo, ObjMarcas marca){
-        //http://fipeapi.appspot.com/api/1/carros/veiculos/21.json
-
         try{
             HttpURLConnection conexao = conectar(MARCAS_URL+tipo+"/veiculos/"+marca.getId().toString()+".json");
             Log.d("HTTP: "+MARCAS_URL+tipo+"/veiculos/"+marca.getId().toString()," html");

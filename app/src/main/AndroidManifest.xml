@@ -37,6 +37,9 @@
         <activity android:name=".ManagerAdapterTipo"
             android:label="@string/actListaTipos"></activity>
 
+        <activity android:name=".AdicionarPecaOrc"
+            android:label="Adicionar ao Orçamento"></activity>
+
 
         <activity android:name=".ManagerOrcamento">
             <intent-filter>

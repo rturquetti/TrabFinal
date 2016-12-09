@@ -18,16 +18,16 @@ public class CadastroOrcamentoAuxiliar {
         private TextView textDataHora;
         private EditText editClienteOrc;
         private ListView listPecasOrc;
-        private EditText editPrecoOrc;
+        private TextView textPrecoTotalOrc,textPrecoOrc;
 
 
         public CadastroOrcamentoAuxiliar(CadastroOrcamento cadastroOrcamento) {
             textDataHora = (TextView) cadastroOrcamento.findViewById(R.id.textDataHora);
-            String dataHora = retornaDataHora();
-            textDataHora.setText(dataHora);
+            textDataHora.setText(retornaDataHora());
             editClienteOrc = (EditText) cadastroOrcamento.findViewById(R.id.editClienteOrc);
             listPecasOrc = (ListView) cadastroOrcamento.findViewById(R.id.listPecasOrc);
-            editPrecoOrc = (EditText) cadastroOrcamento.findViewById(R.id.editPrecoOrc);
+            textPrecoOrc = (TextView) cadastroOrcamento.findViewById(R.id.textPrecoOrc);
+            textPrecoTotalOrc = (TextView) cadastroOrcamento.findViewById(R.id.textPrecoTotalOrc);
         }
 
         public void exibeOrcamento(Orcamento orcamentoAlterar){
@@ -74,5 +74,9 @@ public class CadastroOrcamentoAuxiliar {
 
     public void carregaCliente(String clienteOrc){
         editClienteOrc.setText(clienteOrc);
+    }
+
+    public void carregaPreco(String valorTotal){
+        textPrecoTotalOrc.setText(valorTotal);
     }
 }
