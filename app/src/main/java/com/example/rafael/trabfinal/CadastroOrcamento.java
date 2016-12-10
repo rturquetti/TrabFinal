@@ -30,6 +30,7 @@ public class CadastroOrcamento extends AppCompatActivity {
     ListView listPecasOrc;
     private TextView textPrecoTotalOrc,textPrecoOrc;
     ArrayList<Peca> pecas = new ArrayList<Peca>();
+    Cliente clienteClicado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +80,19 @@ public class CadastroOrcamento extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Orcamento orcamento = auxiliar.retornaOrcamento();
-                OrcamentoDAO dao = new OrcamentoDAO(CadastroOrcamento.this);
+                Orcamento orcamento = auxiliar.retornaOrcamento(clienteClicado);
+                OrcamentoDAO daoOrc = new OrcamentoDAO(CadastroOrcamento.this);
+                PecasOrcamentoDAO daoPecaOrc = new PecasOrcamentoDAO(CadastroOrcamento.this);
 
                 if (orcamentoParaAlterar == null) {
                     if (auxiliar.CampoVazio()) {
                         Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();
                     } else {
-                        dao.salva(orcamento);
-                        dao.close();
+                        daoOrc.salva(orcamento);
+                        daoOrc.close();
+                        //daoPecaOrc.salva(pecas);
+                        //daoPecaOrc.close();
+                        Toast.makeText(getApplicationContext(), "Salvo com sucesso", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 } else {
@@ -95,7 +100,7 @@ public class CadastroOrcamento extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();
                     } else {
                         orcamento.setId(orcamentoParaAlterar.getId());
-                        dao.editar(orcamento);
+                        daoOrc.editar(orcamento);
                         finish();
                     }
                 }
@@ -115,7 +120,7 @@ public class CadastroOrcamento extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1112){
             if (resultCode == Activity.RESULT_OK){
-                Cliente clienteClicado = (Cliente) data.getSerializableExtra("clienteClicado");
+                clienteClicado = (Cliente) data.getSerializableExtra("clienteClicado");
 
                 auxiliar.carregaCliente(clienteClicado.getNomeCli().toString());
             }

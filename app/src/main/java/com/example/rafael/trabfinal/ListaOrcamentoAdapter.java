@@ -46,12 +46,12 @@ public class ListaOrcamentoAdapter  extends BaseAdapter{
             LayoutInflater inflater = activity.getLayoutInflater();
             View linha = inflater.inflate(R.layout.activity_linha_orcamento,null);
 
-            TextView nomeLinhaPeca = (TextView)linha.findViewById(R.id.idOrcamento);
-            nomeLinhaPeca.setText((int) orcamento.getId());
-            TextView marcaLinhaPeca = (TextView)linha.findViewById(R.id.nomeCliente);
-            marcaLinhaPeca.setText((int) orcamento.getId());
-            TextView marcaLinhaCarro = (TextView)linha.findViewById(R.id.data);
-            marcaLinhaCarro.setText((int) orcamento.getId());
+            TextView idOrcamento = (TextView)linha.findViewById(R.id.idOrcamento);
+            idOrcamento.setText(String.valueOf(orcamento.getId()));
+            TextView nomeCliente = (TextView)linha.findViewById(R.id.nomeCliente);
+            nomeCliente.setText(String.valueOf(orcamento.getIdCliente()));
+            TextView dataHora = (TextView)linha.findViewById(R.id.dataHora);
+            dataHora.setText(orcamento.getDataHora());
 
             return linha;
         }

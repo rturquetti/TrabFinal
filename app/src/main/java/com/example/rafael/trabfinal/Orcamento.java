@@ -7,16 +7,12 @@ import java.io.Serializable;
  */
 
 public class Orcamento implements Serializable {
-    long id,idCliente, idProdutoOrc;
+    long id,idCliente;
     String dataHora;
 
     @Override
     public String toString() {
-        return "Orcamento{" +
-                "id=" + id +
-                ", idCliente=" + idCliente +
-                ", idProdutoOrc=" + idProdutoOrc +
-                '}';
+        return "id=" + id +", idCliente=" + idCliente;
     }
 
 
@@ -29,16 +25,8 @@ public class Orcamento implements Serializable {
         return idCliente;
     }
 
-    public long getIdProdutoOrc() {
-        return idProdutoOrc;
-    }
-
     public String getDataHora() {
         return dataHora;
-    }
-
-    public void setIdProdutoOrc(long idProdutoOrc) {
-        this.idProdutoOrc = idProdutoOrc;
     }
 
     public void setId(long id) {

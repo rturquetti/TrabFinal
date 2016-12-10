@@ -23,68 +23,54 @@ public class OrcamentoDAO extends SQLiteOpenHelper{
     }
 
     public void salva(Orcamento orcamento){
-//        ContentValues values = new ContentValues();
-//        values.put("fotoPeca",peca.getFotoPeca());
-//        values.put("nomePeca",peca.getNomePeca());
-//        values.put("marcaPeca",peca.getMarcaPeca());
-//        values.put("tipoCarro",peca.getTipoCarro());
-//        values.put("marcaCarro",peca.getMarcaCarro());
-//        values.put("modeloCarro",peca.getModeloCarro());
-//        values.put("anoModeloCarro",peca.getAnoModeloCarro());
-//        values.put("qtdePeca",peca.getQtdePeca());
-//        values.put("precoPeca",peca.getPreco());
-//
-//        getWritableDatabase().insert("Pecas",null,values);
+        ContentValues values = new ContentValues();
+        values.put("idClienteOrc",orcamento.getIdCliente());
+        values.put("dataHoraOrc",orcamento.getDataHora());
+
+        getWritableDatabase().insert("Orcamentos",null,values);
     }
 
-    public void editar(Orcamento peca){
-//        ContentValues values = new ContentValues();
-//
-//        values.put("fotoPeca",peca.getFotoPeca());
-//        values.put("nomePeca",peca.getNomePeca());
-//        values.put("marcaPeca",peca.getMarcaPeca());
-//        values.put("tipoCarro",peca.getTipoCarro());
-//        values.put("marcaCarro",peca.getMarcaCarro());
-//        values.put("modeloCarro",peca.getModeloCarro());
-//        values.put("anoModeloCarro",peca.getAnoModeloCarro());
-//        values.put("qtdePeca",peca.getQtdePeca());
-//        values.put("precoPeca",peca.getPreco());
-//
-//        String[] args = {peca.getIdPeca().toString()};
-//        getWritableDatabase().update("Pecas",values,"id=?",args);
+
+
+
+    public void editar(Orcamento orcamento){
+        ContentValues values = new ContentValues();
+        values.put("idClienteOrc",orcamento.getIdCliente());
+        values.put("dataHoraOrc",orcamento.getDataHora());
+
+        String[] args = {String.valueOf(orcamento.getId())};
+        getWritableDatabase().update("Orcamentos",values,"id=?",args);
     }
 
     public void deletar(Orcamento orcamento){
         String[] args = {String.valueOf(orcamento.getId())};
-        getWritableDatabase().delete("Pecas","id=?",args);
+        getWritableDatabase().delete("Orcamentos","id=?",args);
 
     }
 
     public List<Orcamento> getLista(){
-        String[] colunas = {"id","fotoPeca","nomePeca","marcaPeca","tipoCarro","marcaCarro","modeloCarro","anoModeloCarro","qtdePeca","precoPeca"};
+        String[] colunas = {"id","idClienteOrc","dataHoraOrc"};
 
-        Cursor cursor = getWritableDatabase().query("Pecas",colunas,null,null,null,null,null);
+        Cursor cursor = getWritableDatabase().query("Orcamentos",colunas,null,null,null,null,null);
 
         ArrayList<Orcamento> orcamentos = new ArrayList<Orcamento>();
 
         while (cursor.moveToNext()) {
-
             Orcamento orcamento = new Orcamento();
-
-
+            orcamento.setId(cursor.getLong(0));
+            orcamento.setIdCliente(Long.parseLong(cursor.getString(1)));
+            orcamento.setDataHora(cursor.getString(2));
 
             orcamentos.add(orcamento);
         }
-
         return orcamentos;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String string = "CREATE TABLE Pecas (id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "fotoPeca TEXT, nomePeca TEXT, marcaPeca TEXT, tipoCarro TEXT, marcaCarro TEXT,"+
-                "modeloCarro TEXT, anoModeloCarro TEXT, qtdePeca INTEGER,precoPeca REAL);";
-        db.execSQL(string);
+        String stringOrcamento = "CREATE TABLE Orcamentos (id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "idClienteOrc INTEGER, dataHoraOrc TEXT, FOREIGN KEY(idClienteOrc) REFERENCES clientes(id));";
+        db.execSQL(stringOrcamento);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

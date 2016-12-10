@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class CadastroOrcamentoAuxiliar {
         private TextView textDataHora;
         private EditText editClienteOrc;
         private ListView listPecasOrc;
-        private TextView textPrecoTotalOrc,textPrecoOrc;
+        private TextView textPrecoTotalOrc;
 
 
         public CadastroOrcamentoAuxiliar(CadastroOrcamento cadastroOrcamento) {
@@ -26,7 +27,6 @@ public class CadastroOrcamentoAuxiliar {
             textDataHora.setText(retornaDataHora());
             editClienteOrc = (EditText) cadastroOrcamento.findViewById(R.id.editClienteOrc);
             listPecasOrc = (ListView) cadastroOrcamento.findViewById(R.id.listPecasOrc);
-            textPrecoOrc = (TextView) cadastroOrcamento.findViewById(R.id.textPrecoOrc);
             textPrecoTotalOrc = (TextView) cadastroOrcamento.findViewById(R.id.textPrecoTotalOrc);
         }
 
@@ -37,13 +37,17 @@ public class CadastroOrcamentoAuxiliar {
             //editPrecoOrc.setText(orcamentoAlterar.getRuaCli());
         }
 
-        public Orcamento retornaOrcamento() {
+        public Orcamento retornaOrcamento(Cliente clienteOrcamento) {
             Orcamento orcamento = new Orcamento();
+
+            orcamento.setDataHora(textDataHora.getText().toString());
+            orcamento.setIdCliente(clienteOrcamento.getId());
 
             //cliente.setEmailCli(editEmailCli.getText().toString());
 
             return orcamento;
         }
+
 
     public String retornaDataHora() {
         Calendar c = Calendar.getInstance();

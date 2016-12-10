@@ -53,10 +53,6 @@ public class AdicionarPecaOrc extends AppCompatActivity {
                 pecaParaAdicionar.setPreco(Double.parseDouble(String.valueOf(addPrecoPecaOrcamento.getText().toString())));
                 Intent paraOrcamento = new Intent(AdicionarPecaOrc.this,CadastroOrcamento.class);
 
-                Log.d("peçaMandada"+pecaParaAdicionar,"ret");
-                Log.d("quantidadepeçaMandada"+pecaParaAdicionar.getQtdePeca(),"ret");
-                Log.d("valorpeçaMandada"+pecaParaAdicionar.getPreco(),"ret");
-
                 paraOrcamento.putExtra("pecaClicado",pecaParaAdicionar);
                 setResult(RESULT_OK,paraOrcamento);
                 finish();
