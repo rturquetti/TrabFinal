@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rafael on 03/12/2016.
@@ -30,11 +31,10 @@ public class CadastroOrcamentoAuxiliar {
             textPrecoTotalOrc = (TextView) cadastroOrcamento.findViewById(R.id.textPrecoTotalOrc);
         }
 
-        public void exibeOrcamento(Orcamento orcamentoAlterar){
-            editClienteOrc.setText(String.valueOf(orcamentoAlterar.getId()));
+        public void exibeOrcamento(Orcamento orcamentoAlterar, ArrayList<Cliente> nomeClienteOrc, List<Peca> listPecasAdd){
+            editClienteOrc.setText(nomeClienteOrc.get(nomeClienteOrc.size()-1).getNomeCli());
             textDataHora.setText(orcamentoAlterar.getDataHora());
-            //listPecasOrc.setText(orcamentoAlterar.getNomeCli());
-            //editPrecoOrc.setText(orcamentoAlterar.getRuaCli());
+            carregaPreco(String.valueOf(getValorTotal(listPecasAdd)));
         }
 
         public Orcamento retornaOrcamento(Cliente clienteOrcamento) {
@@ -58,13 +58,34 @@ public class CadastroOrcamentoAuxiliar {
         int minuto = c.get(Calendar.MINUTE);
 
         String stDia, stMes ,stAno, stHora, stMinuto;
-        stDia = String.valueOf(dia);
-        stMes = String.valueOf(mes);
-        stAno = String.valueOf(ano);
-        stHora = String.valueOf(hora);
-        stMinuto = String.valueOf(minuto);
+        if (mes < 10){
+            stMes = "0"+String.valueOf(mes);
+        }
+        else {
+            stMes = String.valueOf(mes);
+        }
+        if (dia < 10){
+            stDia = "0"+String.valueOf(dia);
+        }
+        else {
+            stDia = String.valueOf(dia);
+        }
+        if (hora < 10){
+            stHora = "0"+String.valueOf(hora);
+        }
+        else {
+            stHora = String.valueOf(hora);
+        }
+        if (minuto < 10){
+            stMinuto = "0"+String.valueOf(minuto);
+        }
+        else {
+            stMinuto = String.valueOf(minuto);
+        }
 
-        return stDia+"/"+stMes+"/"+stAno+" - "+stHora+":"+stMinuto;
+        stAno = String.valueOf(ano);
+
+        return stDia+"/"+stMes+"/"+stAno+"   "+stHora+":"+stMinuto;
     }
 
     public boolean CampoVazio(){
@@ -75,6 +96,16 @@ public class CadastroOrcamentoAuxiliar {
                 return false;
             }
         }
+
+    public Double getValorTotal(List<Peca> pecas){
+        Double valor=0.0;
+
+        for(int i = 0; i < pecas.size(); i++ ) {
+            Peca cacaPeca = pecas.get(i);
+            valor += (cacaPeca.getQtdePeca()) * (cacaPeca.getPreco());
+        }
+        return valor;
+    }
 
     public void carregaCliente(String clienteOrc){
         editClienteOrc.setText(clienteOrc);

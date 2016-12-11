@@ -22,15 +22,15 @@ public class OrcamentoDAO extends SQLiteOpenHelper{
         super(context, DATABASE, null, VERSAO);
     }
 
-    public void salva(Orcamento orcamento){
+    public Long salva(Orcamento orcamento){
         ContentValues values = new ContentValues();
         values.put("idClienteOrc",orcamento.getIdCliente());
         values.put("dataHoraOrc",orcamento.getDataHora());
 
-        getWritableDatabase().insert("Orcamentos",null,values);
+        long orgGravado = getWritableDatabase().insert("Orcamentos",null,values);
+
+        return orgGravado;
     }
-
-
 
 
     public void editar(Orcamento orcamento){
@@ -42,10 +42,11 @@ public class OrcamentoDAO extends SQLiteOpenHelper{
         getWritableDatabase().update("Orcamentos",values,"id=?",args);
     }
 
-    public void deletar(Orcamento orcamento){
+    public Long deletar(Orcamento orcamento){
+        Long orcDeletar = orcamento.getId();
         String[] args = {String.valueOf(orcamento.getId())};
         getWritableDatabase().delete("Orcamentos","id=?",args);
-
+        return orcDeletar;
     }
 
     public List<Orcamento> getLista(){
@@ -74,7 +75,7 @@ public class OrcamentoDAO extends SQLiteOpenHelper{
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String string = "DROP TABLE IF EXISTS Pecas";
+        String string = "DROP TABLE IF EXISTS Orcamentos";
         db.execSQL(string);
         this.onCreate(db);
     }

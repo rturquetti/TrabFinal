@@ -44,7 +44,7 @@ public class ManagerPecaOrcAdapter extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
-        atualizaLista(listPecasOrc,pecaClicada);
+        atualizaLista();
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -59,7 +59,7 @@ public class ManagerPecaOrcAdapter extends AppCompatActivity {
         });
     }
 
-    public void atualizaLista(ListView listPecasOrc, Peca pecaClicada){
+    public void atualizaLista(){
 /*        Intent addPeca = getIntent();
         Peca pecaParaAdd = (Peca) addPeca.getSerializableExtra("pecaClicado");
 
@@ -74,8 +74,6 @@ public class ManagerPecaOrcAdapter extends AppCompatActivity {
 
 
 */
-
-
 
         pecas.add(pecaClicada);
 

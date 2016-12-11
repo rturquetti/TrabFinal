@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rafael on 28/11/2016.
@@ -31,6 +32,10 @@ public class CadastroOrcamento extends AppCompatActivity {
     private TextView textPrecoTotalOrc,textPrecoOrc;
     ArrayList<Peca> pecas = new ArrayList<Peca>();
     Cliente clienteClicado;
+    ArrayList<Cliente> clienteOrcamento = new ArrayList<Cliente>();
+
+    List<Peca> listPecasMandar;
+    List<Peca> listPecasAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,26 @@ public class CadastroOrcamento extends AppCompatActivity {
 
 
         if (orcamentoParaAlterar != null) {
+            Double valorTotal = null;
             botaoSalvar.setText("Alterar");
-            auxiliar.exibeOrcamento(orcamentoParaAlterar);
+
+            ClienteDAO clienteOrc = new ClienteDAO(CadastroOrcamento.this);
+            PecasOrcamentoDAO montandoListaOrcamento = new PecasOrcamentoDAO(CadastroOrcamento.this);
+            PecaDAO listaPecasMontada = new PecaDAO(CadastroOrcamento.this);
+
+            clienteOrcamento = (ArrayList<Cliente>) clienteOrc.getNome(orcamentoParaAlterar.getIdCliente());
+
+            listPecasMandar = listaPecasMontada.getLista();
+            listPecasAdd = montandoListaOrcamento.getListaOrcPreenchida(listPecasMandar,orcamentoParaAlterar.getId());
+
+            ListaPecaOrcAdapter adapter = new ListaPecaOrcAdapter(listPecasAdd,this);
+            listPecasOrc.setAdapter(adapter);
+
+            clienteOrc.close();
+            montandoListaOrcamento.close();
+            listaPecasMontada.close();
+
+            auxiliar.exibeOrcamento(orcamentoParaAlterar,clienteOrcamento,listPecasAdd);
         }
 
 
@@ -88,10 +111,10 @@ public class CadastroOrcamento extends AppCompatActivity {
                     if (auxiliar.CampoVazio()) {
                         Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();
                     } else {
-                        daoOrc.salva(orcamento);
+                        Long orcGravado = daoOrc.salva(orcamento);
                         daoOrc.close();
-                        //daoPecaOrc.salva(pecas);
-                        //daoPecaOrc.close();
+                        daoPecaOrc.salva(pecas,orcGravado);
+                        daoPecaOrc.close();
                         Toast.makeText(getApplicationContext(), "Salvo com sucesso", Toast.LENGTH_LONG).show();
                         finish();
                     }
@@ -155,7 +178,6 @@ public class CadastroOrcamento extends AppCompatActivity {
 
                 //editPrecoOrc.setText(pecavalorTotal.toString());
                 auxiliar.carregaPreco(String.valueOf(pecavalorTotal));
-
 
             }
         }

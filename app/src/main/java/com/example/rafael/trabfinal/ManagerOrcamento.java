@@ -70,9 +70,11 @@ public class ManagerOrcamento extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 OrcamentoDAO dao = new OrcamentoDAO(ManagerOrcamento.this);
-
-                dao.deletar(orcamento);
+                PecasOrcamentoDAO dao2 = new PecasOrcamentoDAO(ManagerOrcamento.this);
+                Long orcDeletar = dao.deletar(orcamento);
+                dao2.deletar(orcDeletar);
                 dao.close();
+                dao2.close();
                 atualizaLista();
 
                 return false;
