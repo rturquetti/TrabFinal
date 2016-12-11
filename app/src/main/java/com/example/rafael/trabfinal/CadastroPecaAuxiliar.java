@@ -42,8 +42,6 @@ public class CadastroPecaAuxiliar {
         editMarcaCarro.setText(pecaAlterar.getMarcaCarro());
         editModeloCarro.setText(pecaAlterar.getModeloCarro());
         editAnoModeloCarro.setText(pecaAlterar.getAnoModeloCarro());
-        //editQtdePeca.setText(String.valueOf(pecaAlterar.getQtdePeca()));
-        //editPrecoPeca.setText(String.valueOf(pecaAlterar.getPreco()));
     }
 
     public Peca retornaPeca() {
@@ -53,9 +51,6 @@ public class CadastroPecaAuxiliar {
         peca.setMarcaCarro(editMarcaCarro.getText().toString());
         peca.setModeloCarro(editModeloCarro.getText().toString());
         peca.setAnoModeloCarro(editAnoModeloCarro.getText().toString());
-        //peca.setQtdePeca(Integer.parseInt(String.valueOf(editQtdePeca.getText())));
-        //peca.setPreco(Double.parseDouble(String.valueOf(editPrecoPeca.getText())));
-
         return peca;
     }
 

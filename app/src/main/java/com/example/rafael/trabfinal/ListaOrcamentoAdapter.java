@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,13 +45,17 @@ public class ListaOrcamentoAdapter  extends BaseAdapter{
         public View getView(int position, View convertView, ViewGroup parent) {
             Orcamento orcamento = orcamentos.get(position);
 
+            ClienteDAO clienteOrc = new ClienteDAO(activity);
+            Cliente clienteOrcamento = clienteOrc.getNome(orcamento.getIdCliente());
+            clienteOrc.close();
+
             LayoutInflater inflater = activity.getLayoutInflater();
             View linha = inflater.inflate(R.layout.activity_linha_orcamento,null);
 
             TextView idOrcamento = (TextView)linha.findViewById(R.id.idOrcamento);
             idOrcamento.setText(String.valueOf(orcamento.getId()));
             TextView nomeCliente = (TextView)linha.findViewById(R.id.nomeCliente);
-            nomeCliente.setText(String.valueOf(orcamento.getIdCliente()));
+            nomeCliente.setText(clienteOrcamento.getNomeCli());
             TextView dataHora = (TextView)linha.findViewById(R.id.dataHora);
             dataHora.setText(orcamento.getDataHora());
 

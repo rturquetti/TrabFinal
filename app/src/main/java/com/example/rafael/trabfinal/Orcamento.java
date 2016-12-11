@@ -15,8 +15,6 @@ public class Orcamento implements Serializable {
         return "id=" + id +", idCliente=" + idCliente;
     }
 
-
-
     public long getId() {
         return id;
     }

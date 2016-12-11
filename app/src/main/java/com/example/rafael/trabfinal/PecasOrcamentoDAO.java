@@ -35,29 +35,10 @@ public class PecasOrcamentoDAO extends SQLiteOpenHelper {
         }
     }
 
-    public void editar(Orcamento peca){
-//        ContentValues values = new ContentValues();
-//
-//        values.put("fotoPeca",peca.getFotoPeca());
-//        values.put("nomePeca",peca.getNomePeca());
-//        values.put("marcaPeca",peca.getMarcaPeca());
-//        values.put("tipoCarro",peca.getTipoCarro());
-//        values.put("marcaCarro",peca.getMarcaCarro());
-//        values.put("modeloCarro",peca.getModeloCarro());
-//        values.put("anoModeloCarro",peca.getAnoModeloCarro());
-//        values.put("qtdePeca",peca.getQtdePeca());
-//        values.put("precoPeca",peca.getPreco());
-//
-//        String[] args = {peca.getIdPeca().toString()};
-//        getWritableDatabase().update("Pecas",values,"id=?",args);
-    }
-
     public void deletar(Long orcDeletar){
         String[] args = {String.valueOf(orcDeletar)};
         getWritableDatabase().delete("OrcamentoPecas","idOrcamento=?",args);
-
     }
-
 
     public List<Peca> getListaOrcPreenchida(List<Peca> pecas, Long Orc){
         String[] colunas = {"id", "idOrcamento", "idPeca", "quantidadePeca", "valorPeca"};
@@ -68,13 +49,11 @@ public class PecasOrcamentoDAO extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()) {
             Peca pecaParaMandar = new Peca();
-            //pecaParaMandar.setNomePeca(pecaPercorrida.getNomePeca());
             for(int i = 0; i < pecas.size(); i++ ) {
                 Peca cacaPeca = pecas.get(i);
                 if (cacaPeca.getIdPeca() == cursor.getInt(2)){
                     pecaParaMandar.setNomePeca(cacaPeca.getNomePeca());
                 }
-
             }
             pecaParaMandar.setQtdePeca(cursor.getInt(3));
             pecaParaMandar.setPreco(cursor.getDouble(4));
@@ -84,7 +63,6 @@ public class PecasOrcamentoDAO extends SQLiteOpenHelper {
 
         return listaPecaMandar;
     }
-
 
     public List<OrcamentoPecas> getLista(){
         String[] colunas = {"id","idOrcamento","idPeca","quantidadePeca","valorPeca"};

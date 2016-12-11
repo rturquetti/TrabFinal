@@ -68,7 +68,9 @@ public class ClienteDAO extends SQLiteOpenHelper{
 
     }
 
-    public List<Cliente> getNome(Long nomeCliOrc){
+    public Cliente getNome(Long nomeCliOrc){
+        Cliente clienteRetornar=null;
+
         String[] colunas = {"id","cpfCli","nomeCli","ruaCli","numCli","compleCli","bairroCli","cepCli","cidadeCli","estadoCli","telCli","emailCli"};
 
         Cursor cursor = getWritableDatabase().query("Clientes",colunas,"Clientes.id like '%"+nomeCliOrc+"%'",null,null,null,null);
@@ -85,7 +87,11 @@ public class ClienteDAO extends SQLiteOpenHelper{
             clientes.add(cliente);
         }
 
-        return clientes;
+        for (int f=0; f<clientes.size(); f++){
+            clienteRetornar = clientes.get(f);
+        }
+
+        return clienteRetornar;
     }
 
     public List<Cliente> getLista(){

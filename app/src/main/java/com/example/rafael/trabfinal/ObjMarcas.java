@@ -9,18 +9,9 @@ import java.io.Serializable;
 public class ObjMarcas implements Serializable{
     String name, fipe_name, order, key, id;
 
-    /*public ObjMarcas(String name, String fipe_name, String order, String key, String id) {
-        this.name = name;
-        this.fipe_name = fipe_name;
-        this.order = order;
-        this.key = key;
-        this.id = id;
-    }
-    */
     public String toString(){
         return name;
     }
-
 
     public String getName() {
         return name;

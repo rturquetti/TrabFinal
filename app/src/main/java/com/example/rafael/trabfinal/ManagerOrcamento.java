@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,7 +90,6 @@ public class ManagerOrcamento extends AppCompatActivity {
         dao.close();
 
         ListaOrcamentoAdapter adapter = new ListaOrcamentoAdapter(orcamento,this);
-
         listOrcamento.setAdapter(adapter);
     }
     @Override

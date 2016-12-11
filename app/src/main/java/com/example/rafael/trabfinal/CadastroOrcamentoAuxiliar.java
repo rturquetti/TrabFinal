@@ -31,8 +31,8 @@ public class CadastroOrcamentoAuxiliar {
             textPrecoTotalOrc = (TextView) cadastroOrcamento.findViewById(R.id.textPrecoTotalOrc);
         }
 
-        public void exibeOrcamento(Orcamento orcamentoAlterar, ArrayList<Cliente> nomeClienteOrc, List<Peca> listPecasAdd){
-            editClienteOrc.setText(nomeClienteOrc.get(nomeClienteOrc.size()-1).getNomeCli());
+        public void exibeOrcamento(Orcamento orcamentoAlterar, Cliente nomeClienteOrc, List<Peca> listPecasAdd){
+            editClienteOrc.setText(nomeClienteOrc.getNomeCli());
             textDataHora.setText(orcamentoAlterar.getDataHora());
             carregaPreco(String.valueOf(getValorTotal(listPecasAdd)));
         }
@@ -42,8 +42,6 @@ public class CadastroOrcamentoAuxiliar {
 
             orcamento.setDataHora(textDataHora.getText().toString());
             orcamento.setIdCliente(clienteOrcamento.getId());
-
-            //cliente.setEmailCli(editEmailCli.getText().toString());
 
             return orcamento;
         }

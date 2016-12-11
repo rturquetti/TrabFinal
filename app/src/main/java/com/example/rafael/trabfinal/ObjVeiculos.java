@@ -12,15 +12,7 @@ public class ObjVeiculos implements Serializable {
     public String toString(){
         return fipe_name;
     }
-/*
-    public ObjVeiculos(String fipe_marca, String name, String marca, String id, String fipe_name) {
-        this.fipe_marca = fipe_marca;
-        this.name = name;
-        this.marca = marca;
-        this.id = id;
-        this.fipe_name = fipe_name;
-    }
-*/
+
     public String getFipe_marca() {
         return fipe_marca;
     }

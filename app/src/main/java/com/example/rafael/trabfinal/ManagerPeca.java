@@ -49,11 +49,6 @@ public class ManagerPeca extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View view, int posicao, long id) {
                 pecaClicado = (Peca) adapter.getItemAtPosition(posicao);
                 pegaInfo();
-                //Intent irCadastro = new Intent(ManagerPeca.this, AdicionarPecaOrc.class);
-                //irCadastro.putExtra("pecaClicado", pecaClicado);
-                //setResult(RESULT_OK,irCadastro);
-                //startActivityForResult(irCadastro);
-                //finish();
 
             }
         });
@@ -113,18 +108,6 @@ public class ManagerPeca extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_peca,menu);
 
-/*
-        ListView listPeca = (ListView)findViewById(R.id.listPeca);
-
-        PecaDAO dao = new PecaDAO(this);
-        List<Peca> pecas = dao.getLista();
-        dao.close();
-
-        int layaout = android.R.layout.simple_list_item_1;
-
-        ArrayAdapter<Peca> adapter = new ArrayAdapter<Peca>(this, layaout ,pecas);
-        listPeca.setAdapter(adapter);
-*/
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -177,42 +160,5 @@ public class ManagerPeca extends AppCompatActivity {
         });
         builder.show();
     }
-
-/*   public void pegaInfo() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        builder.setCancelable(false);
-        builder.setTitle("Info");
-        builder.setView(inflater.inflate(R.layout.dialog, null));
-
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-
-                //valorPeca = input.getText().toString();
-                //Toast.makeText(ManagerPeca.this, "positivo=" + input.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
-
-
-                //Log.d("quatidade passada: "+quantidadeNoDialog.getText().toString(),"//");
-                //Log.d("valor passado: "+valorNoDialog.getText().toString(),"//");
-//                Intent irCadastro = new Intent(ManagerPeca.this, CadastroOrcamento.class);
-//                irCadastro.putExtra("pecaClicado", pecaClicado);
-//                irCadastro.putExtra("quantidade",qtdePeca);
-//                irCadastro.putExtra("valor",valorPeca);
-//                setResult(RESULT_OK,irCadastro);
-//                finish();
-            }
-        });
-        //define um botão como negativo.
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-            }
-        });
-
-
-        builder.show();
-    }
-    */
 }
 

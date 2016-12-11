@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /**
@@ -31,6 +33,7 @@ public class ManagerPecaOrcAdapter extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int posicao, long id) {
                 pecaClicada = (Peca) adapter.getItemAtPosition(posicao);
+                Toast.makeText(getApplicationContext(), "clicando", Toast.LENGTH_LONG).show();
             }
         });
         listPecasOrc.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -53,27 +56,13 @@ public class ManagerPecaOrcAdapter extends AppCompatActivity {
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
+                pecas.remove(pecaClicada);
                 return false;
             }
         });
     }
 
     public void atualizaLista(){
-/*        Intent addPeca = getIntent();
-        Peca pecaParaAdd = (Peca) addPeca.getSerializableExtra("pecaClicado");
-
-        Log.d("peçaClicada"+pecaParaAdd,"ret");
-
-        ArrayList<Peca> pecas = new ArrayList<Peca>();
-        pecas.add(pecaParaAdd);
-
-        ListaPecaAdapter adapter = new ListaPecaAdapter(pecas,this);
-
-        listPecaOrc.setAdapter(adapter);
-
-
-*/
 
         pecas.add(pecaClicada);
 

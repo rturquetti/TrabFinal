@@ -32,10 +32,7 @@ public class CadastroOrcamento extends AppCompatActivity {
     private TextView textPrecoTotalOrc,textPrecoOrc;
     ArrayList<Peca> pecas = new ArrayList<Peca>();
     Cliente clienteClicado;
-    ArrayList<Cliente> clienteOrcamento = new ArrayList<Cliente>();
-
     List<Peca> listPecasMandar;
-    List<Peca> listPecasAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,26 +56,27 @@ public class CadastroOrcamento extends AppCompatActivity {
 
 
         if (orcamentoParaAlterar != null) {
-            Double valorTotal = null;
-            botaoSalvar.setText("Alterar");
+            botaoSalvar.setVisibility(View.GONE);
+            editClienteOrc.setEnabled(false);
+            imgAddPeca.setVisibility(View.GONE);
 
             ClienteDAO clienteOrc = new ClienteDAO(CadastroOrcamento.this);
             PecasOrcamentoDAO montandoListaOrcamento = new PecasOrcamentoDAO(CadastroOrcamento.this);
             PecaDAO listaPecasMontada = new PecaDAO(CadastroOrcamento.this);
 
-            clienteOrcamento = (ArrayList<Cliente>) clienteOrc.getNome(orcamentoParaAlterar.getIdCliente());
+            clienteClicado = clienteOrc.getNome(orcamentoParaAlterar.getIdCliente());
 
             listPecasMandar = listaPecasMontada.getLista();
-            listPecasAdd = montandoListaOrcamento.getListaOrcPreenchida(listPecasMandar,orcamentoParaAlterar.getId());
+            pecas = (ArrayList<Peca>) montandoListaOrcamento.getListaOrcPreenchida(listPecasMandar,orcamentoParaAlterar.getId());
 
-            ListaPecaOrcAdapter adapter = new ListaPecaOrcAdapter(listPecasAdd,this);
+            ListaPecaOrcAdapter adapter = new ListaPecaOrcAdapter(pecas,this);
             listPecasOrc.setAdapter(adapter);
 
             clienteOrc.close();
             montandoListaOrcamento.close();
             listaPecasMontada.close();
 
-            auxiliar.exibeOrcamento(orcamentoParaAlterar,clienteOrcamento,listPecasAdd);
+            auxiliar.exibeOrcamento(orcamentoParaAlterar,clienteClicado,pecas);
         }
 
 
@@ -122,9 +120,7 @@ public class CadastroOrcamento extends AppCompatActivity {
                     if (auxiliar.CampoVazio()) {
                         Toast.makeText(getApplicationContext(), "Preencha os Campos", Toast.LENGTH_LONG).show();
                     } else {
-                        orcamento.setId(orcamentoParaAlterar.getId());
-                        daoOrc.editar(orcamento);
-                        finish();
+
                     }
                 }
             }
@@ -151,13 +147,6 @@ public class CadastroOrcamento extends AppCompatActivity {
         if(requestCode == 1113){
             if (resultCode == Activity.RESULT_OK){
                 Peca pecaClicada = (Peca) data.getSerializableExtra("pecaClicado");
-                //String quantidade = data.getStringExtra("quantidade");
-                //String valor = data.getStringExtra("valor");
-                //linhaOrc.atualizaLista(listPecasOrc, pecaClicada);
-                /**/
-                Log.d("peçaClicada"+pecaClicada,"ret");
-                Log.d("quantidadepeçaClicada"+pecaClicada.getQtdePeca(),"ret");
-                Log.d("valorpeçaClicada"+pecaClicada.getPreco(),"ret");
 
                 pecas.add(pecaClicada);
 
@@ -176,7 +165,6 @@ public class CadastroOrcamento extends AppCompatActivity {
 
                 listPecasOrc.setAdapter(adapter);
 
-                //editPrecoOrc.setText(pecavalorTotal.toString());
                 auxiliar.carregaPreco(String.valueOf(pecavalorTotal));
 
             }

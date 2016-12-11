@@ -22,7 +22,6 @@ import java.util.List;
 public class VeiculoInfoHttp {
     public static final String MARCAS_URL = "http://fipeapi.appspot.com/api/1/";
 
-    //public static final String MARCAS_URL = "http://www.codifique.net/wsCM/VeiculosRafael.json";
     private static HttpURLConnection conectar(String urlArquivo) throws IOException {
 
         final int SEGUNDOS = 1000; //apenas para facilitar a conversão para segundos dos parametros
@@ -47,7 +46,6 @@ public class VeiculoInfoHttp {
     public static List<ObjVeiculos> carregarObjVeiculosJson(String tipo, ObjMarcas marca){
         try{
             HttpURLConnection conexao = conectar(MARCAS_URL+tipo+"/veiculos/"+marca.getId().toString()+".json");
-            Log.d("HTTP: "+MARCAS_URL+tipo+"/veiculos/"+marca.getId().toString()," html");
 
             int resposta = conexao.getResponseCode(); //Código do protocolo http. Exemplo: 404 arquivo nao encontrado
             if(resposta == HttpURLConnection.HTTP_OK) {
@@ -68,12 +66,10 @@ public class VeiculoInfoHttp {
 
         List<ObjVeiculos> listaVeiculos = new ArrayList<ObjVeiculos>();
 
-        //JSONArray jsonListaObjVeiculos = json.getJSONArray("veiculos");
         JSONArray veiculosJson = new JSONArray(json);
         JSONObject veiculo;
 
         for(int i=0; i < veiculosJson.length(); i++) {
-            //JSONObject jsonObjVeiculos = jsonListaObjVeiculos.getJSONObject(i);
             veiculo = new JSONObject(veiculosJson.getString(i));
 
             ObjVeiculos objetoVeiculo = new ObjVeiculos();

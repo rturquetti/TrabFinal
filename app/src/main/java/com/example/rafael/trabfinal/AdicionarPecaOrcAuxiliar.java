@@ -31,8 +31,6 @@ public class AdicionarPecaOrcAuxiliar {
         peca = pecaAlterar;
         nomePecaOrcamento.setText(pecaAlterar.getNomePeca());
         marcaPecaOrcamento.setText(pecaAlterar.getMarcaPeca());
-        //addQtdePecaOrcamento.setText(String.valueOf(pecaAlterar.getQtdePeca()));
-        //addPrecoPecaOrcamento.setText(String.valueOf(pecaAlterar.getPreco()));
     }
 
     public Peca retornaPeca() {

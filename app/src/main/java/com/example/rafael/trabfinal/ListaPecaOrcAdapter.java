@@ -18,7 +18,6 @@ public class ListaPecaOrcAdapter extends BaseAdapter{
     private List<Peca> pecas;
     private Activity activity;
     Peca peca;
-    //EditText qtdeLinhaOrc, valorLinhaOrc;
 
     public ListaPecaOrcAdapter(List<Peca> pecas, Activity activity) {
         this.pecas = pecas;

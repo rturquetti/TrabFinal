@@ -32,16 +32,6 @@ public class OrcamentoDAO extends SQLiteOpenHelper{
         return orgGravado;
     }
 
-
-    public void editar(Orcamento orcamento){
-        ContentValues values = new ContentValues();
-        values.put("idClienteOrc",orcamento.getIdCliente());
-        values.put("dataHoraOrc",orcamento.getDataHora());
-
-        String[] args = {String.valueOf(orcamento.getId())};
-        getWritableDatabase().update("Orcamentos",values,"id=?",args);
-    }
-
     public Long deletar(Orcamento orcamento){
         Long orcDeletar = orcamento.getId();
         String[] args = {String.valueOf(orcamento.getId())};

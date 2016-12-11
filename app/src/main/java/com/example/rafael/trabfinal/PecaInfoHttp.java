@@ -22,7 +22,6 @@ import java.util.List;
 public class PecaInfoHttp {
     public static final String MARCAS_URL = "http://fipeapi.appspot.com/api/1/";
 
-    //public static final String MARCAS_URL = "http://www.codifique.net/wsCM/MarcasRafael.json";
     private static HttpURLConnection conectar(String urlArquivo) throws IOException {
 
         final int SEGUNDOS = 1000; //apenas para facilitar a conversão para segundos dos parametros
